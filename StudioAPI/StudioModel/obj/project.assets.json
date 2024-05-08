@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\NicolasBrosan\\.nuget\\packages\\": {}
+    "C:\\Users\\jonat\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj",
+      "projectUniqueName": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj",
       "projectName": "StudioModel",
-      "projectPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj",
-      "packagesPath": "C:\\Users\\NicolasBrosan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioModel\\obj\\",
+      "projectPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj",
+      "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
+      "outputPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioModel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\NicolasBrosan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioCommonException\\StudioCommonException.csproj": {}
+    "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioCommonException\\StudioCommonException.csproj": {}
   },
   "projects": {
-    "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioCommonException\\StudioCommonException.csproj": {
+    "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioCommonException\\StudioCommonException.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioCommonException\\StudioCommonException.csproj",
+        "projectUniqueName": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioCommonException\\StudioCommonException.csproj",
         "projectName": "StudioCommonException",
-        "projectPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioCommonException\\StudioCommonException.csproj",
-        "packagesPath": "C:\\Users\\NicolasBrosan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioCommonException\\obj\\",
+        "projectPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioCommonException\\StudioCommonException.csproj",
+        "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
+        "outputPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioCommonException\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\NicolasBrosan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

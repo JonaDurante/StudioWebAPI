@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioRepository\\StudioRepository.csproj": {}
+    "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioRepository\\StudioRepository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioRepository\\StudioRepository.csproj": {
+    "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioRepository\\StudioRepository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioRepository\\StudioRepository.csproj",
+        "projectUniqueName": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioRepository\\StudioRepository.csproj",
         "projectName": "StudioRepository",
-        "projectPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioRepository\\StudioRepository.csproj",
-        "packagesPath": "C:\\Users\\NicolasBrosan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioRepository\\obj\\",
+        "projectPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioRepository\\StudioRepository.csproj",
+        "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
+        "outputPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioRepository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\NicolasBrosan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
