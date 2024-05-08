@@ -10,3 +10,15 @@ C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioRepo
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\refint\StudioRepository.dll
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\StudioRepository.pdb
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\ref\StudioRepository.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\bin\Debug\net8.0\StudioRepository.deps.json
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\bin\Debug\net8.0\StudioRepository.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\bin\Debug\net8.0\StudioRepository.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\StudioRepository.GeneratedMSBuildEditorConfig.editorconfig
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\StudioRepository.AssemblyInfoInputs.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\StudioRepository.AssemblyInfo.cs
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\StudioRepository.csproj.CoreCompileInputs.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\StudioRepository.sourcelink.json
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\StudioRepository.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\refint\StudioRepository.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\StudioRepository.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioRepository\obj\Debug\net8.0\ref\StudioRepository.dll

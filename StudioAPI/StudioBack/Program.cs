@@ -1,9 +1,8 @@
-
-using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using StudioDataAccess;
+using System.Reflection;
 
 namespace StudioBack
 {
@@ -13,7 +12,6 @@ namespace StudioBack
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             #region Serilog
             builder.Host.UseSerilog((HostBuilderCtx, LoggerConf) =>
             {
@@ -31,7 +29,6 @@ namespace StudioBack
             #endregion
 
             #region Identity
-
             builder.Services
                 .AddIdentity<UserApp, IdentityRole>(option =>
                 {
@@ -56,7 +53,6 @@ namespace StudioBack
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
 
             #endregion
-
 
             builder.Services.AddAuthentication();
 

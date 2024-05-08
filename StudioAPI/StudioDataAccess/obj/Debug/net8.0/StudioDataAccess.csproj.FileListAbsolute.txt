@@ -16,3 +16,21 @@ C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioData
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\ref\StudioDataAccess.dll
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioDataAccess\bin\Debug\net8.0\StudioDataAccess.runtimeconfig.json
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.genruntimeconfig.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\bin\Debug\net8.0\StudioDataAccess.deps.json
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\bin\Debug\net8.0\StudioDataAccess.runtimeconfig.json
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\bin\Debug\net8.0\StudioDataAccess.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\bin\Debug\net8.0\StudioDataAccess.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\bin\Debug\net8.0\StudioModel.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\bin\Debug\net8.0\StudioModel.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.csproj.AssemblyReference.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.GeneratedMSBuildEditorConfig.editorconfig
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.AssemblyInfoInputs.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.AssemblyInfo.cs
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.csproj.CoreCompileInputs.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.sourcelink.json
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.csproj.CopyComplete
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\refint\StudioDataAccess.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\StudioDataAccess.genruntimeconfig.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioDataAccess\obj\Debug\net8.0\ref\StudioDataAccess.dll

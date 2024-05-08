@@ -20,3 +20,25 @@ C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioServ
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\refint\StudioService.dll
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.pdb
 C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\ref\StudioService.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioService.deps.json
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioService.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioService.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioCommonException.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioDataAccess.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioModel.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioRepository.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioCommonException.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioDataAccess.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioModel.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\bin\Debug\net8.0\StudioRepository.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.csproj.AssemblyReference.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.GeneratedMSBuildEditorConfig.editorconfig
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.AssemblyInfoInputs.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.AssemblyInfo.cs
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.csproj.CoreCompileInputs.cache
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.sourcelink.json
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.csproj.CopyComplete
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\refint\StudioService.dll
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\StudioService.pdb
+E:\Repos\StudioWebAPI\StudioAPI\StudioService\obj\Debug\net8.0\ref\StudioService.dll

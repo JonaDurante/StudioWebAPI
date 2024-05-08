@@ -4534,19 +4534,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\NicolasBrosan\\.nuget\\packages\\": {}
+    "C:\\Users\\jonat\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\StudioDataAccess.csproj",
+      "projectUniqueName": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\StudioDataAccess.csproj",
       "projectName": "StudioDataAccess",
-      "projectPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\StudioDataAccess.csproj",
-      "packagesPath": "C:\\Users\\NicolasBrosan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\obj\\",
+      "projectPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\StudioDataAccess.csproj",
+      "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
+      "outputPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\NicolasBrosan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4560,8 +4560,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj": {
-              "projectPath": "C:\\Users\\NicolasBrosan\\Desktop\\Pegasus Project\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj"
+            "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj": {
+              "projectPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj"
             }
           }
         }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StudioCommonException")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7bd4f53e6a257b7d44a8afe7f9436d74d2d81dc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f9f608cc1b7fc1dddc2a7895b720d4ad0013694")]
 [assembly: System.Reflection.AssemblyProductAttribute("StudioCommonException")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StudioCommonException")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
