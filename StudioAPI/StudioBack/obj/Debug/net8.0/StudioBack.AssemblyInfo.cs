@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StudioBack")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f9f608cc1b7fc1dddc2a7895b720d4ad0013694")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30f755b6b15444684b93d1d6172cb2a048ee1c3f")]
 [assembly: System.Reflection.AssemblyProductAttribute("StudioBack")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StudioBack")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
