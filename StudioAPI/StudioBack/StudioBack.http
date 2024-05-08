@@ -1,0 +1,6 @@
+@StudioBack_HostAddress = http://localhost:5187
+
+GET {{StudioBack_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

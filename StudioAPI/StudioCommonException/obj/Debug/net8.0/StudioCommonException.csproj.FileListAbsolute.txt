@@ -1,0 +1,12 @@
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\bin\Debug\net8.0\StudioCommonException.deps.json
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\bin\Debug\net8.0\StudioCommonException.dll
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\bin\Debug\net8.0\StudioCommonException.pdb
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\StudioCommonException.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\StudioCommonException.AssemblyInfoInputs.cache
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\StudioCommonException.AssemblyInfo.cs
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\StudioCommonException.csproj.CoreCompileInputs.cache
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\StudioCommonException.sourcelink.json
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\StudioCommonException.dll
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\refint\StudioCommonException.dll
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\StudioCommonException.pdb
+C:\Users\NicolasBrosan\Desktop\Pegasus Project\StudioWebAPI\StudioAPI\StudioCommonException\obj\Debug\net8.0\ref\StudioCommonException.dll
