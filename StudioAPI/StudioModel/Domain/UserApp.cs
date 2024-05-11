@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
-namespace StudioDataAccess
+namespace StudioModel.Domain
 {
     public class UserApp : IdentityUser
     {
@@ -14,5 +14,8 @@ namespace StudioDataAccess
         [Column(TypeName = "Datetime")]
         [DisplayFormat(DataFormatString = "DD/MM/YYYY")]
         public DateTime Birthday { get; set; }
+
+        [NotMapped]
+        public string Role { get; set; }
     }
 }
