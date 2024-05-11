@@ -1,0 +1,41 @@
+# Ignorar archivos y directorios generados por el entorno de desarrollo
+obj/
+bin/
+*.suo
+*.user
+*.vs/
+*.bak
+
+# Ignorar archivos de compilación
+*.dll
+*.exe
+*.pdb
+
+# Ignorar archivos generados por Visual Studio
+*.VisualState.xml
+*.cache
+*.log
+*.vspscc
+*.vssscc
+*.appxmanifest
+*.bak
+*.user
+*.suo
+*.cache
+*.sln.docstates
+
+# Ignorar archivos de configuración del IDE
+*.sw*
+
+# Ignorar archivos de publicación
+_PublishedWebsites/
+pubxml/
+
+# Ignorar archivos de dependencias y paquetes NuGet
+packages/
+*.nupkg
+*.pfx
+*.snk
+*.cache
+*.csproj.user
+*.publish.xml
