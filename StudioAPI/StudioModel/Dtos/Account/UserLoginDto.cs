@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StudioModel.Dtos
+namespace StudioModel.Dtos.Account
 {
     public class UserLoginDto
     {
