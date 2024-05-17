@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using StudioDataAccess;
 using System.Reflection;
+using StudioModel.Domain;
 
 namespace StudioBack
 {
