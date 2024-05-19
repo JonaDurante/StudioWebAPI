@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StudioCommonException;
 using StudioModel.Domain;
@@ -25,7 +24,7 @@ namespace StudioService.LoginService.Imp
             _jwtService = jwtService;
         }
 
-        public async Task<UserToken> Login(UserLoginDto userLoginDto)
+        public async Task<UserToken?> Login(UserLoginDto userLoginDto)
         {
             try
             {
