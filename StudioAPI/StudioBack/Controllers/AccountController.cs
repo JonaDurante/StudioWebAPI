@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
+using StudioCommonException;
 using StudioModel.Dtos.Account;
 using StudioService.LoginService;
-using System;
-using System.Threading.Tasks;
 
 namespace StudioBack.Controllers
 {
@@ -22,10 +20,15 @@ namespace StudioBack.Controllers
 
         [HttpPost]
         [Route("UserLogin")]
-        public async Task<IActionResult> UserLogin([FromBody] UserLoginDto userLoginDto)
+        public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
                 var loginResult = await _accountService.Login(userLoginDto);
 
                 if (loginResult != null)
@@ -33,33 +36,44 @@ namespace StudioBack.Controllers
                     return Ok(loginResult);
                 }
 
-                return BadRequest();
+                return Unauthorized("Invalid username or password"); 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Console.WriteLine($"Unhandled exception: {e.Message}");
+                return StatusCode(500, "Internal server error"); 
             }
         }
 
         [HttpPost]
         [Route("UserRegister")]
-        public async Task<IActionResult> UserRegister([FromBody] UserRegisterDto userLoginDto)
+        public async Task<IActionResult> Register([FromBody] UserRegisterDto userLoginDto)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
                 var registerResult = await _accountService.Register(userLoginDto);
+
                 if (registerResult != null)
                 {
                     return Ok(registerResult);
                 }
 
-                return BadRequest();
+                return Conflict("Registration failed"); 
+            }
+            catch (RegisterException e)
+            {
+                Console.WriteLine($"Registration error: {e.Message}");
+                return Conflict(e.Message);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Console.WriteLine($"Unhandled exception: {e.Message}");
+                return StatusCode(500, "Internal server error");
             }
         }
     }

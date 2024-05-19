@@ -6,6 +6,7 @@ namespace StudioModel.Dtos.Account
     {
         [Required]
         [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string UserName { get; set; }
 
         [Required]
