@@ -80,6 +80,8 @@ namespace StudioBack
 
             app.UseAuthorization();
 
+            app.UseCors(x => x.AllowAnyOrigin());
+
             app.UseAuthentication();
 
             app.MapControllers();
