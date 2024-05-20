@@ -19,7 +19,7 @@ namespace StudioService.LoginService.Imp
             _userManager = userManager;
         }
 
-        public async Task<List<IdentityRole>>? GetRoles()
+        public async Task<List<IdentityRole>?> GetRoles()
         {
             try
             {
@@ -28,8 +28,9 @@ namespace StudioService.LoginService.Imp
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.LogError(ex, "Error GetRoles");
             }
+            return null;
         }
         public async Task<bool> ChangeRole(UserAndRoleDto userAndRoleDto)
         {
@@ -64,9 +65,9 @@ namespace StudioService.LoginService.Imp
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.LogError(ex, "Error ChangeRole");
             }
-
+            return false;
         }
 
     }

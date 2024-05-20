@@ -5,7 +5,7 @@ namespace StudioService.LoginService
 {
     public interface IRoleService
     {
-        Task<List<IdentityRole>>? GetRoles();
+        Task<List<IdentityRole>?> GetRoles();
         Task<bool> ChangeRole(UserAndRoleDto userAndRoleDto);
     }
 }
