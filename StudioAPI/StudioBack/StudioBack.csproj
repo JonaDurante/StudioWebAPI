@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StudioCommonException\StudioCommonException.csproj" />
     <ProjectReference Include="..\StudioModel\StudioModel.csproj" />
     <ProjectReference Include="..\StudioService\StudioService.csproj" />
   </ItemGroup>

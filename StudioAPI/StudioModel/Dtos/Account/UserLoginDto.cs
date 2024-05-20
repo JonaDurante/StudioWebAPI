@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StudioModel.Dtos
+namespace StudioModel.Dtos.Account
 {
     public class UserLoginDto
     {
         [Required]
         [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string UserName { get; set; }
 
         [Required]

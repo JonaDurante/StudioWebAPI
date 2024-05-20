@@ -1,5 +1,4 @@
-﻿
-namespace StudioModel.Domain
+﻿namespace StudioModel.Domain
 {
     public class UserToken
     {

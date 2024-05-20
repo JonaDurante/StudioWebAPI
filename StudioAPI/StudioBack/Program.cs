@@ -2,8 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using StudioDataAccess;
-using System.Reflection;
 using StudioModel.Domain;
+using StudioService;
+using StudioService.LoginService;
+using StudioService.LoginService.Imp;
+using System.Reflection;
 
 namespace StudioBack
 {
@@ -45,7 +48,8 @@ namespace StudioBack
 
             #region Injection Dependency
 
-            //builder.Services.AddScoped<>();
+            builder.Services.AddScoped<IJwtService, JwtService>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
 
             #endregion
 
@@ -62,8 +66,8 @@ namespace StudioBack
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
 
+            var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
