@@ -39,14 +39,12 @@ namespace StudioService.LoginService.Imp
 
                     return userToken;
                 }
-
-                return null;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine($"Unhandled exception: {e.Message}"); ///Change for logger and test if the exception goes to controller.
-                throw;
+                _logger.LogError(ex, "Login error");
             }
+            return null;
         }
 
         public async Task<UserToken?> Register(UserRegisterDto userLoginDto)

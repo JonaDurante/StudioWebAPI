@@ -10,7 +10,6 @@ namespace StudioBack.Controllers
     {
         private readonly IAccountService _accountService;
 
-
         public AccountController(IAccountService loginService)
         {
             _accountService = loginService;
@@ -30,7 +29,7 @@ namespace StudioBack.Controllers
 
                 return Unauthorized("Invalid username or password");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, "Internal server error");
             }
@@ -39,14 +38,21 @@ namespace StudioBack.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userLoginDto)
         {
-            var registerResult = await _accountService.Register(userLoginDto);
-
-            if (registerResult != null)
+            try
             {
-                return Ok(registerResult);
-            }
+                var registerResult = await _accountService.Register(userLoginDto);
 
-            return StatusCode(500, "Internal server error");
+                if (registerResult != null)
+                {
+                    return Ok(registerResult);
+                }
+
+                return StatusCode(500, "Internal server error");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }
