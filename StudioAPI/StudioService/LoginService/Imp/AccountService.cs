@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using StudioCommonException;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
 
@@ -9,11 +8,8 @@ namespace StudioService.LoginService.Imp
     public class AccountService : IAccountService
     {
         private readonly SignInManager<UserApp> _signInManager;
-
         private readonly UserManager<UserApp> _userManager;
-
         private readonly ILogger<AccountService> _logger;
-
         private readonly IJwtService _jwtService;
 
         public AccountService(SignInManager<UserApp> signInManager, UserManager<UserApp> userManager, ILogger<AccountService> logger, IJwtService jwtService)
@@ -36,21 +32,19 @@ namespace StudioService.LoginService.Imp
                 if (result.Succeeded)
                 {
                     var userApp = await _userManager.FindByEmailAsync(userLoginDto.UserName);
-                    var roles = await _userManager.GetRolesAsync(userApp);
-                    userApp.Role = roles.FirstOrDefault()!;
+                    var roles = await _userManager.GetRolesAsync(userApp!);
+                    userApp!.Role = roles.FirstOrDefault()!;
 
                     var userToken = _jwtService.GeneratedToken(userApp);
 
                     return userToken;
                 }
-
-                return null;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine($"Unhandled exception: {e.Message}");
-                throw;
+                _logger.LogError(ex, "Login error");
             }
+            return null;
         }
 
         public async Task<UserToken?> Register(UserRegisterDto userLoginDto)
@@ -83,23 +77,20 @@ namespace StudioService.LoginService.Imp
                             return await Login(userLoged);
                         }
                     }
-                    else {
-                        var error = String.Join("*", createResult.Errors.Select(e => e.Description));
-                        throw new RegisterException(error);
+                    else
+                    {
+                        var error = string.Join("*", createResult.Errors.Select(e => e.Description));
+                        _logger.LogError(error, "Registration error");
+                        return null;
                     }
                 }
-                return null;
             }
-            catch (RegisterException e)
+            catch (Exception ex)
             {
-                Console.WriteLine($"Registration error: {e.Message}");
-                throw;
+                _logger.LogError(ex, "Registration error");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Unhandled exception: {e.Message}");
-                throw;
-            }
+
+            return null;
         }
     }
 }
