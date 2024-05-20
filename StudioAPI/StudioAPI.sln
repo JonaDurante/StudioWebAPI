@@ -3,17 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioBack", "StudioBack\StudioBack.csproj", "{ABCCF520-E39F-420D-8DFD-35E865000713}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudioBack", "StudioBack\StudioBack.csproj", "{ABCCF520-E39F-420D-8DFD-35E865000713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioService", "StudioService\StudioService.csproj", "{8CE38050-49A2-4CF8-9572-03A70039B28C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudioService", "StudioService\StudioService.csproj", "{8CE38050-49A2-4CF8-9572-03A70039B28C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioDataAccess", "StudioDataAccess\StudioDataAccess.csproj", "{F704C4F2-5098-43F5-8A79-D09389FD070E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudioDataAccess", "StudioDataAccess\StudioDataAccess.csproj", "{F704C4F2-5098-43F5-8A79-D09389FD070E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioModel", "StudioModel\StudioModel.csproj", "{90BBB359-A436-4A9C-B578-C0102651ABC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudioModel", "StudioModel\StudioModel.csproj", "{90BBB359-A436-4A9C-B578-C0102651ABC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioCommonException", "StudioCommonException\StudioCommonException.csproj", "{64417B53-ACC0-40B4-B1C0-1EF2097FED76}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioRepository", "StudioRepository\StudioRepository.csproj", "{052EFBC8-68B5-4616-9935-990CB093FCFC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{657733F2-3F11-4113-AA2B-80B2E05ADA2E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +38,6 @@ Global
 		{90BBB359-A436-4A9C-B578-C0102651ABC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90BBB359-A436-4A9C-B578-C0102651ABC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90BBB359-A436-4A9C-B578-C0102651ABC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64417B53-ACC0-40B4-B1C0-1EF2097FED76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64417B53-ACC0-40B4-B1C0-1EF2097FED76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64417B53-ACC0-40B4-B1C0-1EF2097FED76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64417B53-ACC0-40B4-B1C0-1EF2097FED76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{052EFBC8-68B5-4616-9935-990CB093FCFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{052EFBC8-68B5-4616-9935-990CB093FCFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{052EFBC8-68B5-4616-9935-990CB093FCFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{052EFBC8-68B5-4616-9935-990CB093FCFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

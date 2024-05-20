@@ -1656,6 +1656,10 @@
       "StudioModel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.4",
+          "Microsoft.AspNetCore.Identity.UI": "8.0.4"
+        },
         "compile": {
           "bin/placeholder/StudioModel.dll": {}
         },
@@ -4534,19 +4538,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jonat\\.nuget\\packages\\": {}
+    "C:\\Users\\hexac\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\StudioDataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\nicoa\\Documents\\personal repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\StudioDataAccess.csproj",
       "projectName": "StudioDataAccess",
-      "projectPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\StudioDataAccess.csproj",
-      "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
-      "outputPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\obj\\",
+      "projectPath": "C:\\Users\\nicoa\\Documents\\personal repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\StudioDataAccess.csproj",
+      "packagesPath": "C:\\Users\\hexac\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nicoa\\Documents\\personal repos\\StudioWebAPI\\StudioAPI\\StudioDataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hexac\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4554,14 +4558,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://10.40.7.17:8624/nuget/CFO.APIv2": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj": {
-              "projectPath": "E:\\Repos\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj"
+            "C:\\Users\\nicoa\\Documents\\personal repos\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj": {
+              "projectPath": "C:\\Users\\nicoa\\Documents\\personal repos\\StudioWebAPI\\StudioAPI\\StudioModel\\StudioModel.csproj"
             }
           }
         }
@@ -4612,12 +4617,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.5, 8.0.5]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

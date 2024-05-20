@@ -1,9 +1,12 @@
-
-using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using StudioDataAccess;
+using StudioModel.Domain;
+using StudioService;
+using StudioService.LoginService;
+using StudioService.LoginService.Imp;
+using System.Reflection;
 
 namespace StudioBack
 {
@@ -13,7 +16,6 @@ namespace StudioBack
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             #region Serilog
             builder.Host.UseSerilog((HostBuilderCtx, LoggerConf) =>
             {
@@ -31,7 +33,6 @@ namespace StudioBack
             #endregion
 
             #region Identity
-
             builder.Services
                 .AddIdentity<UserApp, IdentityRole>(option =>
                 {
@@ -47,7 +48,9 @@ namespace StudioBack
 
             #region Injection Dependency
 
-            //builder.Services.AddScoped<>();
+            builder.Services.AddScoped<IJwtService, JwtService>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
 
             #endregion
 
@@ -57,7 +60,6 @@ namespace StudioBack
 
             #endregion
 
-
             builder.Services.AddAuthentication();
 
             builder.Services.AddControllers();
@@ -65,8 +67,8 @@ namespace StudioBack
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
 
+            var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
