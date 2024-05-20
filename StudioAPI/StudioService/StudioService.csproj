@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StudioCommonException\StudioCommonException.csproj" />
     <ProjectReference Include="..\StudioDataAccess\StudioDataAccess.csproj" />
     <ProjectReference Include="..\StudioModel\StudioModel.csproj" />
-    <ProjectReference Include="..\StudioRepository\StudioRepository.csproj" />
   </ItemGroup>
 
 </Project>

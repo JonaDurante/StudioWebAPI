@@ -2,16 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using StudioDataAccess;
-using System.Reflection;
 using StudioModel.Domain;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
-using System;
+using StudioService;
 using StudioService.LoginService;
 using StudioService.LoginService.Imp;
-using StudioService;
+using System.Reflection;
 
 namespace StudioBack
 {
