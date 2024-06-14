@@ -7,6 +7,7 @@ using StudioService;
 using StudioService.LoginService;
 using StudioService.LoginService.Imp;
 using System.Reflection;
+using StudioDataAccess.InterfaceDataAccess;
 
 namespace StudioBack
 {
