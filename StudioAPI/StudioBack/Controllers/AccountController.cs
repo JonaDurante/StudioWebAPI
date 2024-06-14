@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using StudioModel.Dtos.Account;
+using StudioModel.Dtos.User;
 using StudioService.LoginService;
 
 namespace StudioBack.Controllers
@@ -9,10 +11,12 @@ namespace StudioBack.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
+        private readonly IMapper _mapper;
 
-        public AccountController(IAccountService loginService)
+        public AccountController(IAccountService loginService, IMapper mapper)
         {
             _accountService = loginService;
+            _mapper = mapper;
         }
 
         [HttpPost("Login")]
@@ -53,6 +57,18 @@ namespace StudioBack.Controllers
             {
                 return StatusCode(500, "Internal server error");
             }
+        }
+
+        [HttpGet("GetUserDataById/{userId:guid}")]
+        public async Task<IActionResult> GetUserDataById(Guid userId) {
+
+            var user = await _accountService.GetUserData(userId);
+            if (user == null)
+            { 
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<ProfileDto>(user));
         }
     }
 }

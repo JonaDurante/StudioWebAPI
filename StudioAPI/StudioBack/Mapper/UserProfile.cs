@@ -9,6 +9,7 @@ namespace StudioBack.Mapper
         public UserProfile()
         {
             CreateMap<UserApp, UserDto>();
+            CreateMap<UserApp, ProfileDto>();
         }
     }
 }

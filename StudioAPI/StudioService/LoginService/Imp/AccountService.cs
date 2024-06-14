@@ -92,5 +92,24 @@ namespace StudioService.LoginService.Imp
 
             return null;
         }
+
+        public async Task<UserApp?> GetUserData(Guid userId)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (user != null)
+                {
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetUserData error");
+            }
+
+            _logger.LogError("User not found");
+            return null;
+        }
     }
 }
