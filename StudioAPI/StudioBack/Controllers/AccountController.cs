@@ -38,7 +38,7 @@ namespace StudioBack.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-
+        
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userLoginDto)
         {
@@ -61,14 +61,39 @@ namespace StudioBack.Controllers
 
         [HttpGet("GetUserDataById/{userId:guid}")]
         public async Task<IActionResult> GetUserDataById(Guid userId) {
+            try
+            {
+                var user = await _accountService.GetUserData(userId);
+                if (user == null)
+                {
+                    return NotFound();
+                }
 
-            var user = await _accountService.GetUserData(userId);
-            if (user == null)
-            { 
-                return NotFound();
+                return Ok(_mapper.Map<ProfileDto>(user));
             }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
-            return Ok(_mapper.Map<ProfileDto>(user));
+        [HttpPost("EditUserData")]
+        public async Task<IActionResult> EditUserData([FromBody] ProfileEditDto profileEditDto)
+        {
+            try
+            {
+                var editResult = await _accountService.EditUserData(profileEditDto);
+                if (editResult != null)
+                {
+                    return Ok(editResult);
+                }
+
+                return StatusCode(500, "Internal server error");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }

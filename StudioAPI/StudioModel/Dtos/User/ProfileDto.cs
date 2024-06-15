@@ -13,5 +13,13 @@ namespace StudioModel.Dtos.User
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        public string UserPhoto { get; set; }
+
+
     }
 }

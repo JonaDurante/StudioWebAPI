@@ -12,6 +12,10 @@ namespace StudioModel.Domain
         public string CustomUserName { get; set; }
 
         [PersonalData]
+        [Column(TypeName = "varchar(MAX)")]
+        public string UserPhoto { get; set; }
+
+        [PersonalData]
         [Column(TypeName = "Datetime")]
         [DisplayFormat(DataFormatString = "DD/MM/YYYY")]
         public DateTime Birthday { get; set; }
