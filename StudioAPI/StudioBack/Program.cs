@@ -9,6 +9,7 @@ using StudioService.LoginService.Imp;
 using System.Reflection;
 using StudioDataAccess.InterfaceDataAccess;
 using StudioBack.Dependency_Injection;
+using StudioBack.Middlewares;
 
 namespace StudioBack
 {
@@ -79,6 +80,8 @@ namespace StudioBack
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 
