@@ -18,21 +18,15 @@ namespace StudioBack.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
-            try
-            {
-                var loginResult = await _accountService.Login(userLoginDto);
+            var loginResult = await _accountService.Login(userLoginDto);
 
-                if (loginResult != null)
-                {
-                    return Ok(loginResult);
-                }
-
-                return Unauthorized("Invalid username or password");
-            }
-            catch (Exception)
+            if (loginResult != null)
             {
-                return StatusCode(500, "Internal server error");
+                return Ok(loginResult);
             }
+
+            return Unauthorized("Invalid username or password");
+
         }
 
         [HttpPost("Register")]
