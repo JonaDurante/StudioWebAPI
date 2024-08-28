@@ -11,6 +11,12 @@ namespace StudioDataAccess
         {
             _context = context;
         }
+
+        public void Dispose()
+        {
+           _context.Dispose();
+        }
+
         public void Save()
         {
             _context.SaveChanges();

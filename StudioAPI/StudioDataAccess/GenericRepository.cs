@@ -36,19 +36,16 @@ namespace StudioDataAccess
         public void Add(TEntity entity)
         {
             _identityDbContext.Set<TEntity>().Add(entity);
-            _identityDbContext.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
             _identityDbContext.Set<TEntity>().Update(entity);
-            _identityDbContext.SaveChanges();
         }
 
         public void Delete(TEntity entity)
         {
             _identityDbContext.Set<TEntity>().Remove(entity);
-            _identityDbContext.SaveChanges();
         }
     }
 }
