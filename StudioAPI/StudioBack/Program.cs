@@ -8,6 +8,7 @@ using StudioService.LoginService;
 using StudioService.LoginService.Imp;
 using System.Reflection;
 using StudioDataAccess.InterfaceDataAccess;
+using StudioBack.Dependency_Injection;
 
 namespace StudioBack
 {
@@ -49,9 +50,11 @@ namespace StudioBack
 
             #region Injection Dependency
 
-            builder.Services.AddScoped<IJwtService, JwtService>();
-            builder.Services.AddScoped<IAccountService, AccountService>();
-            builder.Services.AddScoped<IRoleService, RoleService>();
+            //builder.Services.AddScoped<IJwtService, JwtService>();
+            //builder.Services.AddScoped<IAccountService, AccountService>();
+            //builder.Services.AddScoped<IRoleService, RoleService>();
+
+            builder.Services.Register();
 
             #endregion
 
