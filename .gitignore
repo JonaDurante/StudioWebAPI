@@ -41,3 +41,6 @@
 /StudioAPI/StudioService/obj/project.nuget.cache
 /StudioAPI/StudioService/obj/StudioService.csproj.nuget.dgspec.json
 /StudioAPI/StudioService/obj/StudioService.csproj.nuget.g.props
+*.wsuo
+*.json
+*.sqlite
