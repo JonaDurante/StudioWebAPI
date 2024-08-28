@@ -4,3 +4,6 @@
 
 /StudioAPI/.vs/StudioAPI
 /StudioAPI/StudioBack/bin/Debug/net8.0
+*.wsuo
+*.json
+*.sqlite
