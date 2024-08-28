@@ -51,10 +51,6 @@ namespace StudioBack
 
             #region Injection Dependency
 
-            //builder.Services.AddScoped<IJwtService, JwtService>();
-            //builder.Services.AddScoped<IAccountService, AccountService>();
-            //builder.Services.AddScoped<IRoleService, RoleService>();
-
             builder.Services.Register();
 
             #endregion
@@ -68,7 +64,7 @@ namespace StudioBack
             builder.Services.AddAuthentication();
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -82,7 +78,7 @@ namespace StudioBack
             });
 
             var app = builder.Build();
-            // Configure the HTTP request pipeline.
+            
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -95,7 +91,7 @@ namespace StudioBack
 
             app.UseAuthorization();
 
-            app.UseCors("AllowSpecificOrigin");
+            app.UseCors(x => x.AllowAnyOrigin());
 
             app.UseAuthentication();
 
