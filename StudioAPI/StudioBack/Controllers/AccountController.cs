@@ -36,8 +36,6 @@ namespace StudioBack.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userLoginDto)
         {
-            try
-            {
                 var registerResult = await _accountService.Register(userLoginDto);
 
                 if (registerResult != null)
@@ -46,11 +44,6 @@ namespace StudioBack.Controllers
                 }
 
                 return StatusCode(500, "Internal server error");
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
         }
 
         [HttpGet("GetUserDataById/{userId:guid}")]
