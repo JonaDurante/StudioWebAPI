@@ -1,5 +1,6 @@
 ﻿using StudioModel.Domain;
 using StudioModel.Dtos.Account;
+using StudioModel.Dtos.User;
 
 namespace StudioService.LoginService
 {
@@ -7,5 +8,7 @@ namespace StudioService.LoginService
     {
         Task<UserToken?> Login(UserLoginDto userLoginDto);
         Task<UserToken?> Register(UserRegisterDto userLoginDto);
+        Task<UserApp?> GetUserData(Guid userId);
+        Task<UserToken?> EditUserData(ProfileEditDto userLoginDto);
     }
 }
