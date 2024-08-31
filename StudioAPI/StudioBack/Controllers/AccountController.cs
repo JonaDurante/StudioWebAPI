@@ -6,44 +6,45 @@ using StudioService.LoginService;
 
 namespace StudioBack.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class AccountController : ControllerBase
-    {
-        private readonly IAccountService _accountService;
-        private readonly IMapper _mapper;
+	[ApiController]
+	[Route("[controller]")]
+	public class AccountController : ControllerBase
+	{
+		private readonly IAccountService _accountService;
+		private readonly IMapper _mapper;
 
-        public AccountController(IAccountService loginService, IMapper mapper)
-        {
-            _accountService = loginService;
-            _mapper = mapper;
-        }
+		public AccountController(IAccountService loginService, IMapper mapper)
+		{
+			_accountService = loginService;
+			_mapper = mapper;
+		}
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
-        {
-            var loginResult = await _accountService.Login(userLoginDto);
+		[HttpPost("Login")]
+		public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
+		{
+			var loginResult = await _accountService.Login(userLoginDto);
 
-            if (loginResult != null)
-            {
-                return Ok(loginResult);
-            }
+			if (loginResult != null)
+			{
+				return Ok(loginResult);
+			}
 
-            return Unauthorized("Invalid username or password");
-        }
+			return Unauthorized("Invalid username or password");
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] UserRegisterDto userLoginDto)
-        {
-            var registerResult = await _accountService.Register(userLoginDto);
+		}
+
+		[HttpPost("Register")]
+		public async Task<IActionResult> Register([FromBody] UserRegisterDto userLoginDto)
+		{
+			var registerResult = await _accountService.Register(userLoginDto);
 
             if (registerResult != null)
             {
                 return Ok(registerResult);
             }
 
-                return StatusCode(500, "Internal server error");
-        }
+			return StatusCode(500, "Internal server error");
+		}
 
         [HttpGet("GetUserDataById/{userId:guid}")]
         public async Task<IActionResult> GetUserDataById(Guid userId)

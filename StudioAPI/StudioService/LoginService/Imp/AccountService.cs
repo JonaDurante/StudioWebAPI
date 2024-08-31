@@ -5,20 +5,20 @@ using StudioModel.Dtos.Account;
 
 namespace StudioService.LoginService.Imp
 {
-    public class AccountService : IAccountService
-    {
-        private readonly SignInManager<UserApp> _signInManager;
-        private readonly UserManager<UserApp> _userManager;
-        private readonly ILogger<AccountService> _logger;
-        private readonly IJwtService _jwtService;
+	public class AccountService : IAccountService
+	{
+		private readonly SignInManager<UserApp> _signInManager;
+		private readonly UserManager<UserApp> _userManager;
+		private readonly ILogger<AccountService> _logger;
+		private readonly IJwtService _jwtService;
 
-        public AccountService(SignInManager<UserApp> signInManager, UserManager<UserApp> userManager, ILogger<AccountService> logger, IJwtService jwtService)
-        {
-            _signInManager = signInManager;
-            _userManager = userManager;
-            _logger = logger;
-            _jwtService = jwtService;
-        }
+		public AccountService(SignInManager<UserApp> signInManager, UserManager<UserApp> userManager, ILogger<AccountService> logger, IJwtService jwtService)
+		{
+			_signInManager = signInManager;
+			_userManager = userManager;
+			_logger = logger;
+			_jwtService = jwtService;
+		}
 
         public async Task<UserToken?> Login(UserLoginDto userLoginDto)
         {
@@ -107,5 +107,12 @@ namespace StudioService.LoginService.Imp
             _logger.LogError("User not found");
             return null;
         }
-    }
+
+		public async Task Logout()
+		{
+			await _signInManager.SignOutAsync();
+
+			_logger.LogInformation("Logout successful");
+		}
+	}
 }
