@@ -25,22 +25,15 @@ namespace StudioBack.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult>? Get()
         {
-            try
-            {
-                var roles = await _roleService.GetRoles();
+            var roles = await _roleService.GetRoles();
 
-                if (roles == null)
-                {
-                    return StatusCode(500, "Internal server error");
-                }
-
-                var roleDto = _mapper.Map<List<RoleDto>>(roles);
-                return Ok(roleDto);
-            }
-            catch (Exception e)
+            if (roles == null)
             {
                 return StatusCode(500, "Internal server error");
             }
+
+            var roleDto = _mapper.Map<List<RoleDto>>(roles);
+            return Ok(roleDto);
         }
 
         [HttpPut("UpdateRoleUser")]
@@ -48,19 +41,12 @@ namespace StudioBack.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromBody] UserAndRoleDto userAndRoleDto)
         {
-            try
+            if (await _roleService.ChangeRole(userAndRoleDto))
             {
-                if (await _roleService.ChangeRole(userAndRoleDto))
-                {
-                    return Ok();
-                }
+                return Ok();
+            }
 
-                return StatusCode(500, "Internal server error");
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Internal server error");
-            }
+            return StatusCode(500, "Internal server error");
         }
     }
 }

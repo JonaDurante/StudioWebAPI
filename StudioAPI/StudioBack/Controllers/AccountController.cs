@@ -38,58 +38,36 @@ namespace StudioBack.Controllers
 		{
 			var registerResult = await _accountService.Register(userLoginDto);
 
-			if (registerResult != null)
-			{
-				return Ok(registerResult);
-			}
+            if (registerResult != null)
+            {
+                return Ok(registerResult);
+            }
 
 			return StatusCode(500, "Internal server error");
 		}
 
-		[HttpGet("GetUserDataById/{userId:guid}")]
-		public async Task<IActionResult> GetUserDataById(Guid userId)
-		{
-			try
-			{
-				var user = await _accountService.GetUserData(userId);
-				if (user == null)
-				{
-					return NotFound();
-				}
+        [HttpGet("GetUserDataById/{userId:guid}")]
+        public async Task<IActionResult> GetUserDataById(Guid userId)
+        {
+            var user = await _accountService.GetUserData(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-				return Ok(_mapper.Map<ProfileDto>(user));
-			}
-			catch (Exception)
-			{
-				return StatusCode(500, "Internal server error");
-			}
-		}
+            return Ok(_mapper.Map<ProfileDto>(user));
+        }
 
-		[HttpPost("EditUserData")]
-		public async Task<IActionResult> EditUserData([FromBody] ProfileEditDto profileEditDto)
-		{
-			try
-			{
-				var editResult = await _accountService.EditUserData(profileEditDto);
-				if (editResult != null)
-				{
-					return Ok(editResult);
-				}
+        [HttpPost("EditUserData")]
+        public async Task<IActionResult> EditUserData([FromBody] ProfileEditDto profileEditDto)
+        {
+            var editResult = await _accountService.EditUserData(profileEditDto);
+            if (editResult != null)
+            {
+                return Ok(editResult);
+            }
 
-				return StatusCode(500, "Internal server error");
-			}
-			catch (Exception)
-			{
-				return StatusCode(500, "Internal server error");
-			}
-		}
-
-		[HttpPost("Logout")]
-		public async Task<IActionResult> Logout()
-		{
-			await _accountService.Logout();
-			return Ok();
-		}
-
-	}
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

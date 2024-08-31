@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
-using StudioModel.Dtos.User;
 
 namespace StudioService.LoginService.Imp
 {
@@ -23,129 +20,93 @@ namespace StudioService.LoginService.Imp
 			_jwtService = jwtService;
 		}
 
-		public async Task<UserToken?> Login(UserLoginDto userLoginDto)
-		{
-			try
-			{
-				_logger.LogTrace("Login begins");
+        public async Task<UserToken?> Login(UserLoginDto userLoginDto)
+        {
+            _logger.LogTrace("Login begins");
 
-				var result =
-					await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
+            var result =
+                await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
 
-				if (result.Succeeded)
-				{
-					var userApp = await _userManager.FindByEmailAsync(userLoginDto.UserName);
-					var roles = await _userManager.GetRolesAsync(userApp!);
-					userApp!.Role = roles.FirstOrDefault()!;
+            if (result.Succeeded)
+            {
+                var userApp = await _userManager.FindByEmailAsync(userLoginDto.UserName);
+                var roles = await _userManager.GetRolesAsync(userApp!);
+                userApp!.Role = roles.FirstOrDefault()!;
 
-					var userToken = _jwtService.GeneratedToken(userApp);
+                var userToken = _jwtService.GeneratedToken(userApp);
 
-					return userToken;
-				}
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "Login error");
-			}
-			return null;
-		}
+                return userToken;
+            }
 
-		public async Task<UserToken?> Register(UserRegisterDto userLoginDto)
-		{
-			try
-			{
-				if (userLoginDto.Password == userLoginDto.ConfirmPassword)
-				{
-					var user = new UserApp()
-					{
-						CustomUserName = userLoginDto.UserName,
-						Email = userLoginDto.Email,
-						UserName = userLoginDto.Email,
-						Birthday = userLoginDto.Birthdate,
-					};
+            return null;
+        }
 
-					var createResult = await _userManager.CreateAsync(user, userLoginDto.Password);
-					if (createResult.Succeeded)
-					{
-						var addRolResult = await _userManager.AddToRoleAsync(user, "User");
-						if (addRolResult.Succeeded)
-						{
-							var userLoged = new UserLoginDto()
-							{
-								UserName = userLoginDto.Email,
-								Password = userLoginDto.Password,
-							};
-							return await Login(userLoged);
-						}
-					}
-					else
-					{
-						var error = string.Join("*", createResult.Errors.Select(e => e.Description));
-						_logger.LogError(error, "Registration error");
-						return null;
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "Registration error");
-			}
+        public async Task<UserToken?> Register(UserRegisterDto userLoginDto)
+        {
+            var user = new UserApp()
+            {
+                CustomUserName = userLoginDto.UserName,
+                Email = userLoginDto.Email,
+                UserName = userLoginDto.Email,
+                Birthday = userLoginDto.Birthdate,
+            };
 
-			return null;
-		}
+            var createResult = await _userManager.CreateAsync(user, userLoginDto.Password);
+            if (createResult.Succeeded)
+            {
+                var addRolResult = await _userManager.AddToRoleAsync(user, "User");
+                if (addRolResult.Succeeded)
+                {
+                    var userLoged = new UserLoginDto()
+                    {
+                        UserName = userLoginDto.Email,
+                        Password = userLoginDto.Password,
+                    };
+                    return await Login(userLoged);
+                }
 
-		public async Task<UserApp?> GetUserData(Guid userId)
-		{
-			try
-			{
-				var user = await _userManager.FindByIdAsync(userId.ToString());
-				if (user != null)
-				{
-					return user;
-				}
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "GetUserData error");
-			}
 
-			_logger.LogError("User not found");
-			return null;
-		}
+            }
+            return null;
+        }
 
-		public async Task<UserToken?> EditUserData(ProfileEditDto profileEditDto)
-		{
-			try
-			{
-				var user = await _userManager.FindByIdAsync(profileEditDto.idUser);
-				if (user != null)
-				{
-					user.UserName = profileEditDto.userProfile.UserName;
-					user.CustomUserName = profileEditDto.userProfile.CustomUserName;
-					user.Birthday = profileEditDto.userProfile.Birthday;
-					user.PhoneNumber = profileEditDto.userProfile.PhoneNumber;
-					user.UserPhoto = profileEditDto.userProfile.UserPhoto;
+        public async Task<UserApp?> GetUserData(Guid userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user != null)
+            {
+                return user;
+            }
+            _logger.LogError("User not found");
+            return null;
+        }
 
-					var updateResult = await _userManager.UpdateAsync(user);
-					if (updateResult.Succeeded)
-					{
-						var roles = await _userManager.GetRolesAsync(user!);
-						user!.Role = roles.FirstOrDefault()!;
+        public async Task<UserToken?> EditUserData(ProfileEditDto profileEditDto)
+        {
+            var user = await _userManager.FindByIdAsync(profileEditDto.idUser);
+            if (user != null)
+            {
+                user.UserName = profileEditDto.userProfile.UserName;
+                user.CustomUserName = profileEditDto.userProfile.CustomUserName;
+                user.Birthday = profileEditDto.userProfile.Birthday;
+                user.PhoneNumber = profileEditDto.userProfile.PhoneNumber;
+                user.UserPhoto = profileEditDto.userProfile.UserPhoto;
 
-						var userToken = _jwtService.GeneratedToken(user);
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (updateResult.Succeeded)
+                {
+                    var roles = await _userManager.GetRolesAsync(user!);
+                    user!.Role = roles.FirstOrDefault()!;
 
-						return userToken;
-					}
-				}
+                    var userToken = _jwtService.GeneratedToken(user);
 
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "EditUserData error");
-			}
-			_logger.LogError("User not found");
-			return null;
-		}
+                    return userToken;
+                }
+            }
+
+            _logger.LogError("User not found");
+            return null;
+        }
 
 		public async Task Logout()
 		{
