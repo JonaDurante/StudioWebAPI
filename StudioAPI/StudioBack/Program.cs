@@ -1,15 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using StudioDataAccess;
-using StudioModel.Domain;
-using StudioService;
-using StudioService.LoginService;
-using StudioService.LoginService.Imp;
-using System.Reflection;
-using StudioDataAccess.InterfaceDataAccess;
 using StudioBack.Dependency_Injection;
 using StudioBack.Middlewares;
+using StudioDataAccess;
+using StudioModel.Domain;
+using System.Reflection;
 
 namespace StudioBack
 {
@@ -32,7 +28,7 @@ namespace StudioBack
             #region Service for entity framework
             var connectionString = builder.Configuration.GetConnectionString("StudioContextConnection")
                                    ?? throw new InvalidOperationException("Connection string 'StudioContextConnection' not found.");
-            builder.Services.AddDbContext<StudioDBContext>(option => option.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<StudioDBContext>(option => option.UseSqlite(connectionString));
             #endregion
 
             #region Identity

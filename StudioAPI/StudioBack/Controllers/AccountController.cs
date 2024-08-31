@@ -42,7 +42,7 @@ namespace StudioBack.Controllers
                 return Ok(registerResult);
             }
 
-            return StatusCode(500, "Internal server error");
+                return StatusCode(500, "Internal server error");
         }
 
         [HttpGet("GetUserDataById/{userId:guid}")]

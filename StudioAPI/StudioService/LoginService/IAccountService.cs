@@ -1,6 +1,5 @@
 ﻿using StudioModel.Domain;
 using StudioModel.Dtos.Account;
-using StudioModel.Dtos.User;
 
 namespace StudioService.LoginService
 {
