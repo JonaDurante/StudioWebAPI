@@ -4,6 +4,7 @@ using Serilog;
 using StudioBack.Dependency_Injection;
 using StudioBack.Middlewares;
 using StudioDataAccess;
+using StudioDataAccess.Seed;
 using StudioModel.Domain;
 using System.Reflection;
 
@@ -26,7 +27,7 @@ namespace StudioBack
             #endregion
 
             #region Service for entity framework
-            var connectionString = builder.Configuration.GetConnectionString("StudioContextConnection")
+            var connectionString = builder.Configuration.GetConnectionString("SqlLiteConnection")
                                    ?? throw new InvalidOperationException("Connection string 'StudioContextConnection' not found.");
             builder.Services.AddDbContext<StudioDBContext>(option => option.UseSqlite(connectionString));
             #endregion
@@ -92,6 +93,12 @@ namespace StudioBack
             app.UseAuthentication();
 
             app.MapControllers();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                DatabaseSeed.SeedUsersAsync(services).GetAwaiter().GetResult();
+            }
 
             app.Run();
         }

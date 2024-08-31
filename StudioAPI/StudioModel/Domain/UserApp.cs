@@ -7,13 +7,8 @@ namespace StudioModel.Domain
 {
     public class UserApp : IdentityUser
     {
-        [PersonalData]
-        [Column(TypeName = "nvarchar(100)")]
-        public string CustomUserName { get; set; }
-
-        [PersonalData]
-        [Column(TypeName = "varchar(MAX)")]
-        public string UserPhoto { get; set; }
+        [Column(TypeName = "varchar(100)")]
+        public string? UserPhoto { get; set; }
 
         [PersonalData]
         [Column(TypeName = "Datetime")]

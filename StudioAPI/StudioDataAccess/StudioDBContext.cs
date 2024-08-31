@@ -17,6 +17,30 @@ namespace StudioDataAccess
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<UserApp>(entity =>
+            {
+                entity.Property(e => e.UserName);
+                entity.Property(e => e.UserPhoto);
+            });
+
+            if (Database.IsSqlServer())
+            {
+                builder.Entity<UserApp>(entity =>
+                {
+                   entity.Property(e => e.UserPhoto)
+                          .HasColumnType("varchar(100)");
+                });
+            }
+
+            if (Database.IsSqlite())
+            {
+                builder.Entity<UserApp>(entity =>
+                {
+                    entity.Property(e => e.UserName).HasColumnType("TEXT");
+                    entity.Property(e => e.UserPhoto).HasColumnType("TEXT");
+                });
+            }
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
