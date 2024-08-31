@@ -23,8 +23,6 @@ namespace StudioService.LoginService.Imp
         {
             _logger.LogTrace("GetRoles begins");
             return await _roleManager.Roles.ToListAsync();
-
-            return null;
         }
         public async Task<bool> ChangeRole(UserAndRoleDto userAndRoleDto)
         {

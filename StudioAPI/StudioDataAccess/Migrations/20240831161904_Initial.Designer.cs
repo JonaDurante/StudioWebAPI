@@ -11,7 +11,7 @@ using StudioDataAccess;
 namespace StudioDataAccess.Migrations
 {
     [DbContext(typeof(StudioDBContext))]
-    [Migration("20240831121236_Initial")]
+    [Migration("20240831161904_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -156,15 +156,8 @@ namespace StudioDataAccess.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("Datetime");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CustomUserName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -205,10 +198,6 @@ namespace StudioDataAccess.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserPhoto")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -22,14 +22,12 @@ namespace StudioService.LoginService.Imp
 
         public async Task<UserToken?> Login(UserLoginDto userLoginDto)
         {
-            _logger.LogTrace("Login begins");
-
             var result =
                 await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
 
             if (result.Succeeded)
             {
-                var userApp = await _userManager.FindByEmailAsync(userLoginDto.UserName);
+                var userApp = await _userManager.FindByNameAsync(userLoginDto.UserName);
                 var roles = await _userManager.GetRolesAsync(userApp!);
                 userApp!.Role = roles.FirstOrDefault()!;
 
@@ -45,10 +43,8 @@ namespace StudioService.LoginService.Imp
         {
             var user = new UserApp()
             {
-                CustomUserName = userLoginDto.UserName,
                 Email = userLoginDto.Email,
                 UserName = userLoginDto.Email,
-                Birthday = userLoginDto.Birthdate,
             };
 
             var createResult = await _userManager.CreateAsync(user, userLoginDto.Password);
@@ -87,10 +83,6 @@ namespace StudioService.LoginService.Imp
             if (user != null)
             {
                 user.UserName = profileEditDto.userProfile.UserName;
-                user.CustomUserName = profileEditDto.userProfile.CustomUserName;
-                user.Birthday = profileEditDto.userProfile.Birthday;
-                user.PhoneNumber = profileEditDto.userProfile.PhoneNumber;
-                user.UserPhoto = profileEditDto.userProfile.UserPhoto;
 
                 var updateResult = await _userManager.UpdateAsync(user);
                 if (updateResult.Succeeded)

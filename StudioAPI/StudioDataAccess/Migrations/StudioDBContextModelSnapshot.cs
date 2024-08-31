@@ -153,15 +153,8 @@ namespace StudioDataAccess.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("Datetime");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CustomUserName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -202,10 +195,6 @@ namespace StudioDataAccess.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserPhoto")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

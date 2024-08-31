@@ -5,8 +5,7 @@ namespace StudioModel.Dtos.Account
     public class UserLoginDto
     {
         [Required]
-        [EmailAddress]
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.Text)]
         public string UserName { get; set; }
 
         [Required]

@@ -22,8 +22,6 @@ namespace StudioService.LoginService.Imp
             {
                 userDto.Add(new UserDto()
                 {
-                    Birthday = user.Birthday,
-                    CustomUserName = user.CustomUserName,
                     Role = user.Role
                 });
             }

@@ -21,15 +21,12 @@ namespace StudioDataAccess
             builder.Entity<UserApp>(entity =>
             {
                 entity.Property(e => e.UserName);
-                entity.Property(e => e.UserPhoto);
             });
 
             if (Database.IsSqlServer())
             {
                 builder.Entity<UserApp>(entity =>
                 {
-                   entity.Property(e => e.UserPhoto)
-                          .HasColumnType("varchar(100)");
                 });
             }
 
@@ -38,7 +35,6 @@ namespace StudioDataAccess
                 builder.Entity<UserApp>(entity =>
                 {
                     entity.Property(e => e.UserName).HasColumnType("TEXT");
-                    entity.Property(e => e.UserPhoto).HasColumnType("TEXT");
                 });
             }
         }
