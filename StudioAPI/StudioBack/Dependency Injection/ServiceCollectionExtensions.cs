@@ -1,6 +1,4 @@
-﻿using StudioDataAccess;
-using StudioDataAccess.InterfaceDataAccess;
-using StudioService;
+﻿using StudioService;
 using StudioService.LoginService;
 using StudioService.LoginService.Imp;
 
@@ -15,9 +13,11 @@ namespace StudioBack.Dependency_Injection
                     .AddClasses()
                     .AsMatchingInterface()
                     .WithScopedLifetime());
+
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IRoleService, RoleService>();
+
             return services;
         }
     }

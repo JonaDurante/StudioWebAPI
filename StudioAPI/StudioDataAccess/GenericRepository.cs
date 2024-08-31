@@ -7,20 +7,20 @@ namespace StudioDataAccess
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly IdentityDbContext _identityDbContext;
+        private readonly StudioDBContext dbContext;
 
-        public GenericRepository(IdentityDbContext identityDbContext)
+        public GenericRepository(StudioDBContext dbContext)
         {
-            _identityDbContext = identityDbContext;
+            this.dbContext = dbContext;
         }
         public IQueryable<TEntity> GetAll()
         {
-            return _identityDbContext.Set<TEntity>();
+            return dbContext.Set<TEntity>();
         }
 
         public IQueryable<TEntity> Filter(Expression<Func<TEntity, object>>[] includeProperties)
         {
-            IQueryable<TEntity> query = _identityDbContext.Set<TEntity>();
+            IQueryable<TEntity> query = dbContext.Set<TEntity>();
             foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
@@ -30,22 +30,22 @@ namespace StudioDataAccess
 
         public TEntity GetById(int id)
         {
-            return _identityDbContext.Set<TEntity>().Find(id)!;
+            return dbContext.Set<TEntity>().Find(id)!;
         }
 
         public void Add(TEntity entity)
         {
-            _identityDbContext.Set<TEntity>().Add(entity);
+            dbContext.Set<TEntity>().Add(entity);
         }
 
         public void Update(TEntity entity)
         {
-            _identityDbContext.Set<TEntity>().Update(entity);
+            dbContext.Set<TEntity>().Update(entity);
         }
 
         public void Delete(TEntity entity)
         {
-            _identityDbContext.Set<TEntity>().Remove(entity);
+            dbContext.Set<TEntity>().Remove(entity);
         }
     }
 }

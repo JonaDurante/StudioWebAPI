@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using StudioDataAccess.InterfaceDataAccess;
+﻿using StudioDataAccess.InterfaceDataAccess;
 
 namespace StudioDataAccess
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IdentityDbContext _context;
+        private readonly StudioDBContext _context;
 
-        public UnitOfWork(IdentityDbContext context)
+        public UnitOfWork(StudioDBContext context)
         {
             _context = context;
         }

@@ -12,6 +12,7 @@ namespace StudioService.LoginService.Imp
         private readonly UserManager<UserApp> _userManager;
         private readonly ILogger<RoleService> _logger;
 
+
         public RoleService(RoleManager<IdentityRole> roleManager, ILogger<RoleService> logger, UserManager<UserApp> userManager)
         {
             _roleManager = roleManager;

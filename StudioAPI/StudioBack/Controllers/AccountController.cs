@@ -30,7 +30,6 @@ namespace StudioBack.Controllers
 			}
 
 			return Unauthorized("Invalid username or password");
-
 		}
 
 		[HttpPost("Register")]
