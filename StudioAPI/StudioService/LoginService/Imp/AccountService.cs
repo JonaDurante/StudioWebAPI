@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
-using StudioModel.Dtos.User;
 
 namespace StudioService.LoginService.Imp
 {
@@ -24,124 +22,88 @@ namespace StudioService.LoginService.Imp
 
         public async Task<UserToken?> Login(UserLoginDto userLoginDto)
         {
-            try
+            _logger.LogTrace("Login begins");
+
+            var result =
+                await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
+
+            if (result.Succeeded)
             {
-                _logger.LogTrace("Login begins");
+                var userApp = await _userManager.FindByEmailAsync(userLoginDto.UserName);
+                var roles = await _userManager.GetRolesAsync(userApp!);
+                userApp!.Role = roles.FirstOrDefault()!;
 
-                var result =
-                    await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
+                var userToken = _jwtService.GeneratedToken(userApp);
 
-                if (result.Succeeded)
-                {
-                    var userApp = await _userManager.FindByEmailAsync(userLoginDto.UserName);
-                    var roles = await _userManager.GetRolesAsync(userApp!);
-                    userApp!.Role = roles.FirstOrDefault()!;
-
-                    var userToken = _jwtService.GeneratedToken(userApp);
-
-                    return userToken;
-                }
+                return userToken;
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Login error");
-            }
+
             return null;
         }
 
         public async Task<UserToken?> Register(UserRegisterDto userLoginDto)
         {
-            try
+            var user = new UserApp()
             {
-                if (userLoginDto.Password == userLoginDto.ConfirmPassword)
+                CustomUserName = userLoginDto.UserName,
+                Email = userLoginDto.Email,
+                UserName = userLoginDto.Email,
+                Birthday = userLoginDto.Birthdate,
+            };
+
+            var createResult = await _userManager.CreateAsync(user, userLoginDto.Password);
+            if (createResult.Succeeded)
+            {
+                var addRolResult = await _userManager.AddToRoleAsync(user, "User");
+                if (addRolResult.Succeeded)
                 {
-                    var user = new UserApp()
+                    var userLoged = new UserLoginDto()
                     {
-                        CustomUserName = userLoginDto.UserName,
-                        Email = userLoginDto.Email,
                         UserName = userLoginDto.Email,
-                        Birthday = userLoginDto.Birthdate,
+                        Password = userLoginDto.Password,
                     };
-
-                    var createResult = await _userManager.CreateAsync(user, userLoginDto.Password);
-                    if (createResult.Succeeded)
-                    {
-                        var addRolResult = await _userManager.AddToRoleAsync(user, "User");
-                        if (addRolResult.Succeeded)
-                        {
-                            var userLoged = new UserLoginDto()
-                            {
-                                UserName = userLoginDto.Email,
-                                Password = userLoginDto.Password,
-                            };
-                            return await Login(userLoged);
-                        }
-                    }
-                    else
-                    {
-                        var error = string.Join("*", createResult.Errors.Select(e => e.Description));
-                        _logger.LogError(error, "Registration error");
-                        return null;
-                    }
+                    return await Login(userLoged);
                 }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Registration error");
-            }
 
+
+            }
             return null;
         }
 
         public async Task<UserApp?> GetUserData(Guid userId)
         {
-            try
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user != null)
             {
-                var user = await _userManager.FindByIdAsync(userId.ToString());
-                if (user != null)
-                {
-                    return user;
-                }
+                return user;
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "GetUserData error");
-            }
-
             _logger.LogError("User not found");
             return null;
         }
 
         public async Task<UserToken?> EditUserData(ProfileEditDto profileEditDto)
         {
-            try
+            var user = await _userManager.FindByIdAsync(profileEditDto.idUser);
+            if (user != null)
             {
-                var user = await _userManager.FindByIdAsync(profileEditDto.idUser);
-                if (user != null)
+                user.UserName = profileEditDto.userProfile.UserName;
+                user.CustomUserName = profileEditDto.userProfile.CustomUserName;
+                user.Birthday = profileEditDto.userProfile.Birthday;
+                user.PhoneNumber = profileEditDto.userProfile.PhoneNumber;
+                user.UserPhoto = profileEditDto.userProfile.UserPhoto;
+
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (updateResult.Succeeded)
                 {
-                    user.UserName = profileEditDto.userProfile.UserName;
-                    user.CustomUserName = profileEditDto.userProfile.CustomUserName;
-                    user.Birthday = profileEditDto.userProfile.Birthday;
-                    user.PhoneNumber = profileEditDto.userProfile.PhoneNumber;
-                    user.UserPhoto = profileEditDto.userProfile.UserPhoto;
+                    var roles = await _userManager.GetRolesAsync(user!);
+                    user!.Role = roles.FirstOrDefault()!;
 
-                    var updateResult = await _userManager.UpdateAsync(user);
-                    if (updateResult.Succeeded)
-                    {
-                        var roles = await _userManager.GetRolesAsync(user!);
-                        user!.Role = roles.FirstOrDefault()!;
+                    var userToken = _jwtService.GeneratedToken(user);
 
-                        var userToken = _jwtService.GeneratedToken(user);
-
-                        return userToken;
-                    }
+                    return userToken;
                 }
+            }
 
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "EditUserData error");
-            }
             _logger.LogError("User not found");
             return null;
         }

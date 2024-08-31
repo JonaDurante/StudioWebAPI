@@ -18,11 +18,6 @@ namespace StudioModel.Dtos.Account
         public required string Password { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Password and confirmation password do not match.")]
-        public required string ConfirmPassword { get; set; }
-
-        [Required]
         [DataType(DataType.Date)]
         public DateTime Birthdate { get; set; }
     }
