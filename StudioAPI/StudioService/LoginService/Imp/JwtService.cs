@@ -41,7 +41,7 @@ namespace StudioService.LoginService.Imp
                 ExpiredTime = expiredTime,
                 Rol = userApp.Role,
                 Token = tokenHandlerResult,
-                UserName = userApp.UserName!
+                UserName = userApp.UserName!,
             };
         }
     }

@@ -44,24 +44,22 @@ namespace StudioService.LoginService.Imp
             var user = new UserApp()
             {
                 Email = userLoginDto.Email,
-                UserName = userLoginDto.Email,
+                UserName = userLoginDto.UserName,
             };
 
             var createResult = await _userManager.CreateAsync(user, userLoginDto.Password);
             if (createResult.Succeeded)
             {
-                var addRolResult = await _userManager.AddToRoleAsync(user, "User");
+                var addRolResult = await _userManager.AddToRoleAsync(user, "user");
                 if (addRolResult.Succeeded)
                 {
                     var userLoged = new UserLoginDto()
                     {
-                        UserName = userLoginDto.Email,
+                        UserName = userLoginDto.UserName,
                         Password = userLoginDto.Password,
                     };
                     return await Login(userLoged);
                 }
-
-
             }
             return null;
         }
