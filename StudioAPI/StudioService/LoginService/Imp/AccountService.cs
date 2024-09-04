@@ -5,37 +5,37 @@ using StudioModel.Dtos.Account;
 
 namespace StudioService.LoginService.Imp
 {
-	public class AccountService : IAccountService
-	{
-		private readonly SignInManager<UserApp> _signInManager;
-		private readonly UserManager<UserApp> _userManager;
-		private readonly ILogger<AccountService> _logger;
-		private readonly IJwtService _jwtService;
+    public class AccountService : IAccountService
+    {
+        private readonly SignInManager<UserApp> _signInManager;
+        private readonly UserManager<UserApp> _userManager;
+        private readonly ILogger<AccountService> _logger;
+        private readonly IJwtService _jwtService;
 
-		public AccountService(SignInManager<UserApp> signInManager, UserManager<UserApp> userManager, ILogger<AccountService> logger, IJwtService jwtService)
-		{
-			_signInManager = signInManager;
-			_userManager = userManager;
-			_logger = logger;
-			_jwtService = jwtService;
-		}
+        public AccountService(SignInManager<UserApp> signInManager, UserManager<UserApp> userManager, ILogger<AccountService> logger, IJwtService jwtService)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _logger = logger;
+            _jwtService = jwtService;
+        }
 
         public async Task<UserToken?> Login(UserLoginDto userLoginDto)
         {
-            var result =
-                await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
-
-            if (result.Succeeded)
+            var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
+            if (user != null)
             {
-                var userApp = await _userManager.FindByNameAsync(userLoginDto.UserName);
-                var roles = await _userManager.GetRolesAsync(userApp!);
-                userApp!.Role = roles.FirstOrDefault()!;
+                var result = _signInManager.CheckPasswordSignInAsync(user, userLoginDto.Password, false);
+                if (result.IsCompletedSuccessfully)
+                {
+                    var roles = await _userManager.GetRolesAsync(user!);
+                    user!.Role = roles.FirstOrDefault()!;
 
-                var userToken = _jwtService.GeneratedToken(userApp);
+                    var userToken = _jwtService.GeneratedToken(user);
 
-                return userToken;
+                    return userToken;
+                }
             }
-
             return null;
         }
 
@@ -55,7 +55,7 @@ namespace StudioService.LoginService.Imp
                 {
                     var userLoged = new UserLoginDto()
                     {
-                        UserName = userLoginDto.UserName,
+                        Email = userLoginDto.Email,
                         Password = userLoginDto.Password,
                     };
                     return await Login(userLoged);
@@ -82,6 +82,8 @@ namespace StudioService.LoginService.Imp
             {
                 user.UserName = profileEditDto.userProfile.UserName;
 
+#warning -----> Falta agregar los campos del ProfileEditDto !
+
                 var updateResult = await _userManager.UpdateAsync(user);
                 if (updateResult.Succeeded)
                 {
@@ -98,11 +100,11 @@ namespace StudioService.LoginService.Imp
             return null;
         }
 
-		public async Task Logout()
-		{
-			await _signInManager.SignOutAsync();
+        public async Task Logout()
+        {
+            await _signInManager.SignOutAsync();
 
-			_logger.LogInformation("Logout successful");
-		}
-	}
+            _logger.LogInformation("Logout successful");
+        }
+    }
 }

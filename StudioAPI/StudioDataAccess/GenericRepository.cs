@@ -1,26 +1,33 @@
-﻿using System.Linq.Expressions;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using StudioDataAccess.InterfaceDataAccess;
+using StudioModel.Abstraction;
+using System.Linq.Expressions;
 
 namespace StudioDataAccess
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
-        private readonly StudioDBContext dbContext;
+        private readonly StudioDBContext _dbContext;
+        private readonly DbSet<T> _entity;
 
-        public GenericRepository(StudioDBContext dbContext)
+        public GenericRepository(StudioDBContext dbContext, DbSet<T> entity)
         {
-            this.dbContext = dbContext;
+            _dbContext = dbContext;
+            _entity = _dbContext.Set<T>();
         }
-        public IQueryable<TEntity> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return dbContext.Set<TEntity>();
+            return _entity;
         }
 
-        public IQueryable<TEntity> Filter(Expression<Func<TEntity, object>>[] includeProperties)
+        public IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive)
         {
-            IQueryable<TEntity> query = dbContext.Set<TEntity>();
+            IQueryable<T> query = _entity;
+            if (isActive)
+            {
+                query.Where(q => q.IsActive == isActive);
+            }
+
             foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
@@ -28,24 +35,38 @@ namespace StudioDataAccess
             return query;
         }
 
-        public TEntity GetById(int id)
+        public T GetById(Guid id)
         {
-            return dbContext.Set<TEntity>().Find(id)!;
+            return _entity.Find(id)!;
         }
 
-        public void Add(TEntity entity)
+        public IEnumerable<T> GetActive(Func<T, bool> lamdaDelegate)
         {
-            dbContext.Set<TEntity>().Add(entity);
+            return _entity.Where(e => e.IsActive).Where(lamdaDelegate);
         }
 
-        public void Update(TEntity entity)
+        public void Add(T entity)
         {
-            dbContext.Set<TEntity>().Update(entity);
+            _entity.Add(entity);
         }
 
-        public void Delete(TEntity entity)
+        public void Update(T entity)
         {
-            dbContext.Set<TEntity>().Remove(entity);
+            _entity.Update(entity);
+        }
+
+        public void LogicDelete(Guid id)
+        {
+            var entity = GetById(id);
+            if (entity != null)
+            {
+                entity.IsActive = false;
+                _entity.Update(entity);
+            }
+        }
+        public void Delete(T entity)
+        {
+            _entity.Remove(entity);
         }
     }
 }

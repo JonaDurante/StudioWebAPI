@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -20,8 +21,8 @@ namespace StudioBack
             builder.Host.UseSerilog((HostBuilderCtx, LoggerConf) =>
             {
                 LoggerConf
-                    .WriteTo.Console() // Escribe en la consola
-                    .WriteTo.Debug()   // Escriba en debug
+                    .WriteTo.Console()
+                    .WriteTo.Debug()
                     .ReadFrom.Configuration(HostBuilderCtx.Configuration);
             });
             #endregion
@@ -58,10 +59,17 @@ namespace StudioBack
 
             #endregion
 
-            builder.Services.AddAuthentication();
+            //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //.AddCookie();
+
+            //builder.Services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("AdminPolicy", policy =>
+            //        policy.RequireRole("admin"));
+            //});
 
             builder.Services.AddControllers();
-            
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -75,7 +83,7 @@ namespace StudioBack
             });
 
             var app = builder.Build();
-            
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

@@ -4,10 +4,6 @@ namespace StudioDataAccess.InterfaceDataAccess
 {
     public interface IGenericRepository<T> where T : class
     {
-        /// <summary>
-        /// Gets all objects from database
-        /// </summary>
-        /// <returns></returns>
         IQueryable<T> GetAll();
 
         /// <summary>
@@ -15,31 +11,18 @@ namespace StudioDataAccess.InterfaceDataAccess
         /// </summary>
         /// <param name="includeProperties"></param>
         /// <returns></returns>
-        IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties);
-
+        public IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive);
         /// <summary>
-        /// Get an object from database by Id
+        /// Gets IsActive objects from database by a delegate
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="GetActive"></param>
         /// <returns></returns>
-        T GetById(int id);
-
-        /// <summary>
-        /// Create a new object to database
-        /// </summary>
-        /// <param name="entity"></param>
+        IEnumerable<T> GetActive(Func<T, bool> lamdaDelegate);
+        T GetById(Guid id);
         void Add(T entity);
-
-        /// <summary>
-        /// Update object changes and save to database
-        /// </summary>
-        /// <param name="entity"></param>
         void Update(T entity);
-
-        /// <summary>
-        /// Delete the object from database
-        /// </summary>
-        /// <param name="entity"></param>
+        void LogicDelete(Guid id);
         void Delete(T entity);
+
     }
 }
