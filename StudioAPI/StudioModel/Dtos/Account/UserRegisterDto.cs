@@ -16,9 +16,5 @@ namespace StudioModel.Dtos.Account
         [Required]
         [DataType(DataType.Password)]
         public required string Password { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime Birthdate { get; set; }
     }
 }
