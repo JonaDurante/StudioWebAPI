@@ -28,7 +28,6 @@ namespace StudioService.LoginService.Imp
                     SecurityAlgorithms.HmacSha256Signature),
                 Subject = new ClaimsIdentity(new [] {new Claim("Id", userApp.Id), 
                     new Claim("Role", userApp.Role)})
-
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

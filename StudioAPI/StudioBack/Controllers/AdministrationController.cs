@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudioModel.Dtos.Role;
 using StudioModel.Dtos.UserAndRole;
@@ -8,7 +11,7 @@ namespace StudioBack.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Policy = "AdminPolicy", Roles = "admin")]
+    [Authorize]
     public class AdministrationController : ControllerBase
     {
         private readonly IRoleService _roleService;
@@ -21,8 +24,7 @@ namespace StudioBack.Controllers
         }
 
         [HttpGet("GetAllRoles")]
-        //[ValidateAntiForgeryToken]
-        //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme,Policy = "AdminPolicy",Roles ="admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "AdminPolicy", Roles = "admin")]
         public async Task<IActionResult>? Get()
         {
             var roles = await _roleService.GetRoles();
@@ -37,8 +39,7 @@ namespace StudioBack.Controllers
         }
 
         [HttpPut("UpdateRoleUser")]
-        //[ValidateAntiForgeryToken]
-        //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Policy = "AdminPolicy", Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "AdminPolicy", Roles = "admin")]
         public async Task<IActionResult> Update([FromBody] UserAndRoleDto userAndRoleDto)
         {
             if (await _roleService.ChangeRole(userAndRoleDto))
