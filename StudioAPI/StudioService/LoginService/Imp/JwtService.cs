@@ -27,7 +27,7 @@ namespace StudioService.LoginService.Imp
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature),
                 Subject = new ClaimsIdentity(new [] {new Claim("Id", userApp.Id), 
-                    new Claim("Role", userApp.Role)})
+                    new Claim("Role", userApp.Role.ToLower())})
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

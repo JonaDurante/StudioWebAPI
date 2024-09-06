@@ -9,6 +9,7 @@ using StudioBack.Dependency_Injection;
 using StudioBack.Middlewares;
 using StudioDataAccess;
 using StudioDataAccess.Seed;
+using StudioModel.Constant;
 using StudioModel.Domain;
 using System.Reflection;
 using System.Text;
@@ -80,18 +81,18 @@ namespace StudioBack
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration[key: "JsonWebTokenKeys:IsUserSigninKey"]!)),
                     ValidateIssuer = false,
-                    //ValidIssuer = builder.Configuration[key: "JsonWebTokenKeys:ValidIsUser"],
+                    ValidIssuer = builder.Configuration[key: "JsonWebTokenKeys:ValidIsUser"],
                     ValidateAudience = false,
-                    //ValidAudience = builder.Configuration[key: "JsonWebTokenKeys:ValidAudience"],
+                    ValidAudience = builder.Configuration[key: "JsonWebTokenKeys:ValidAudience"],
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
                 };
             });
 
-            builder.Services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "admin"));
-            });
+            builder.Services.AddAuthorization(option =>
+                option.AddPolicy("AdminPolicy", p =>
+                    p.RequireClaim(AuthorizationData.AdminUserClaimName, AuthorizationData.AdminUserPolicyName))
+                );
 
             builder.Services.AddControllers();
 
@@ -146,14 +147,13 @@ namespace StudioBack
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseCors(x => x.AllowAnyOrigin());
 
-            //app.UseAuthentication();
-
             app.MapControllers();
-
 
             using (var scope = app.Services.CreateScope())
             {

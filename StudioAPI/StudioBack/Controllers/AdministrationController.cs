@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StudioBack.Helppers;
+using StudioModel.Constant;
 using StudioModel.Dtos.Role;
 using StudioModel.Dtos.UserAndRole;
 using StudioService.LoginService;
@@ -24,7 +24,8 @@ namespace StudioBack.Controllers
         }
 
         [HttpGet("GetAllRoles")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "AdminPolicy", Roles = "admin")]
+        [Authorize]
+        [RequiresClaim(AuthorizationData.AdminUserClaimName, AuthorizationData.AdminUserPolicyName)]
         public async Task<IActionResult>? Get()
         {
             var roles = await _roleService.GetRoles();
@@ -39,7 +40,8 @@ namespace StudioBack.Controllers
         }
 
         [HttpPut("UpdateRoleUser")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "AdminPolicy", Roles = "admin")]
+        [Authorize]
+        [RequiresClaim(AuthorizationData.AdminUserClaimName, AuthorizationData.AdminUserPolicyName)]
         public async Task<IActionResult> Update([FromBody] UserAndRoleDto userAndRoleDto)
         {
             if (await _roleService.ChangeRole(userAndRoleDto))

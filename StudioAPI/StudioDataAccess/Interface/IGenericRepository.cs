@@ -13,7 +13,8 @@ namespace StudioDataAccess.InterfaceDataAccess
         /// <returns></returns>
         public IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive);
         /// <summary>
-        /// Gets IsActive objects from database by a delegate
+        /// Gets IsActive objects from database by a delegate 
+        /// x => x is T || x => x.Name == Name is bool 
         /// </summary>
         /// <param name="GetActive"></param>
         /// <returns></returns>
