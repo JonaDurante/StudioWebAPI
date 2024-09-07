@@ -11,7 +11,7 @@ namespace StudioBack.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    [Authotize(AuthorizationData.Admin)]
     public class AdministrationController : ControllerBase
     {
         private readonly IRoleService _roleService;
@@ -24,8 +24,6 @@ namespace StudioBack.Controllers
         }
 
         [HttpGet("GetAllRoles")]
-        [Authorize]
-        [RequiresClaim(AuthorizationData.AdminUserClaimName, AuthorizationData.AdminUserPolicyName)]
         public async Task<IActionResult>? Get()
         {
             var roles = await _roleService.GetRoles();
@@ -40,8 +38,6 @@ namespace StudioBack.Controllers
         }
 
         [HttpPut("UpdateRoleUser")]
-        [Authorize]
-        [RequiresClaim(AuthorizationData.AdminUserClaimName, AuthorizationData.AdminUserPolicyName)]
         public async Task<IActionResult> Update([FromBody] UserAndRoleDto userAndRoleDto)
         {
             if (await _roleService.ChangeRole(userAndRoleDto))
