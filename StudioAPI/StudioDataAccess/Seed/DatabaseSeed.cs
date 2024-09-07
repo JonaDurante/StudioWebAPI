@@ -46,7 +46,7 @@ namespace StudioDataAccess.Seed
 
                 if (createdUser.Succeeded)
                 {
-                    await Manager.AddToRoleAsync(testUser, "Admin");
+                    await Manager.AddToRoleAsync(testUser, "User");
                 }
             }
 
@@ -57,7 +57,7 @@ namespace StudioDataAccess.Seed
 
                 if (createdUser.Succeeded)
                 {
-                    await Manager.AddToRoleAsync(testTeacher, "Admin");
+                    await Manager.AddToRoleAsync(testTeacher, "teacher");
                 }
             }
         }

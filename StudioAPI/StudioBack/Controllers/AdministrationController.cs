@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using StudioBack.Helppers;
+using StudioModel.Constant;
 using StudioModel.Dtos.Role;
 using StudioModel.Dtos.UserAndRole;
 using StudioService.LoginService;
@@ -8,7 +10,7 @@ namespace StudioBack.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize(Roles = "Admin")]
+    [Authotize(AuthorizationData.Admin)]
     public class AdministrationController : ControllerBase
     {
         private readonly IRoleService _roleService;
@@ -21,8 +23,6 @@ namespace StudioBack.Controllers
         }
 
         [HttpGet("GetAllRoles")]
-        //[ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult>? Get()
         {
             var roles = await _roleService.GetRoles();
@@ -37,8 +37,6 @@ namespace StudioBack.Controllers
         }
 
         [HttpPut("UpdateRoleUser")]
-        //[ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromBody] UserAndRoleDto userAndRoleDto)
         {
             if (await _roleService.ChangeRole(userAndRoleDto))
