@@ -22,7 +22,6 @@ namespace StudioBack
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            #region Serilog
             builder.Host.UseSerilog((HostBuilderCtx, LoggerConf) =>
             {
                 LoggerConf
@@ -30,15 +29,11 @@ namespace StudioBack
                     .WriteTo.Debug()
                     .ReadFrom.Configuration(HostBuilderCtx.Configuration);
             });
-            #endregion
 
-            #region Service for entity framework
             var connectionString = builder.Configuration.GetConnectionString("SqlLiteConnection")
                                    ?? throw new InvalidOperationException("Connection string 'StudioContextConnection' not found.");
             builder.Services.AddDbContext<StudioDBContext>(option => option.UseSqlite(connectionString));
-            #endregion
 
-            #region Identity
             builder.Services
                 .AddIdentity<UserApp, IdentityRole>(option =>
                 {
@@ -50,20 +45,10 @@ namespace StudioBack
                 .AddSignInManager<SignInManager<UserApp>>()
                 .AddEntityFrameworkStores<StudioDBContext>()
                 .AddDefaultTokenProviders();
-            #endregion
-
-            #region Injection Dependency
 
             builder.Services.Register();
 
-            #endregion
-
-            #region Automapper
-
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
-
-            #endregion
-
 
             builder.Services.AddAuthentication(options =>
             {
@@ -91,7 +76,7 @@ namespace StudioBack
 
             builder.Services.AddAuthorization(option =>
                 option.AddPolicy("AdminPolicy", p =>
-                    p.RequireClaim(AuthorizationData.AdminUserClaimName, AuthorizationData.AdminUserPolicyName))
+                    p.RequireClaim(AuthorizationData.UserClaimName, AuthorizationData.Admin))
                 );
 
             builder.Services.AddControllers();
