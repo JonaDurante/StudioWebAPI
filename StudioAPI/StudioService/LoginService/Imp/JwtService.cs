@@ -19,7 +19,7 @@ namespace StudioService.LoginService.Imp
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration[key:"JsonWebTokenKeys:IsUserSigninKey"]!);
-            var expiredTime = DateTime.UtcNow.AddDays(3);
+            var expiredTime = DateTime.UtcNow.AddDays(1);
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
@@ -41,6 +41,7 @@ namespace StudioService.LoginService.Imp
                 Rol = userApp.Role,
                 Token = tokenHandlerResult,
                 UserName = userApp.UserName!,
+                Validity = expiredTime - DateTime.UtcNow
             };
         }
     }
