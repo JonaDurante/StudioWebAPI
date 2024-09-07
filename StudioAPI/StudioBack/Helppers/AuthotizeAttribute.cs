@@ -8,25 +8,18 @@ namespace StudioBack.Helppers
     public class AuthotizeAttribute : Attribute, IAuthorizationFilter
     {
         private readonly string _claimValue;
-
+        private readonly string UserClaimName = "Role";
         public AuthotizeAttribute(string claimValue)
         {
             _claimValue = claimValue;
         }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var a = context.HttpContext.User;
-
-            if (!context.HttpContext.User.Identity!.IsAuthenticated)
+            if (!context.HttpContext.User.Identity!.IsAuthenticated || 
+                (!context.HttpContext.User.HasClaim(UserClaimName, _claimValue.ToLower()) &&
+                !context.HttpContext.User.HasClaim(UserClaimName, AuthorizationData.Admin.ToLower())))
             {
-                context.Result = new ForbidResult();
-                return;
-            }
-
-            if (!context.HttpContext.User.HasClaim(AuthorizationData.UserClaimName, _claimValue.ToLower()) &&
-                !context.HttpContext.User.HasClaim(AuthorizationData.UserClaimName, AuthorizationData.Admin.ToLower()))
-            {
-                context.Result = new ForbidResult();
+                context.Result = new UnauthorizedResult();
                 return;
             }
         }

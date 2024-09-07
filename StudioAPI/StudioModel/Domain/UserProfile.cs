@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using StudioModel.Abstraction;
 
 namespace StudioModel.Domain
 {
-	public class UserProfile : Entity
+    public class UserProfile : Entity
 	{
 		[Required]
 		[DataType(DataType.Text)]
@@ -32,7 +31,5 @@ namespace StudioModel.Domain
 
 		[DataType(DataType.ImageUrl)]
 		public string? UserPhoto { get; set; }
-
-		public UserApp User { get; set; }
 	}
 }

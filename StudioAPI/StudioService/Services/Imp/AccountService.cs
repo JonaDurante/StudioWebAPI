@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
+using StudioService.Services;
 
 namespace StudioService.LoginService.Imp
 {
@@ -81,8 +82,6 @@ namespace StudioService.LoginService.Imp
             if (user != null)
             {
                 user.UserName = profileEditDto.userProfile.UserName;
-
-#warning -----> Falta agregar los campos del ProfileEditDto !
 
                 var updateResult = await _userManager.UpdateAsync(user);
                 if (updateResult.Succeeded)

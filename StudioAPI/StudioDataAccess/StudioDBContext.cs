@@ -37,11 +37,6 @@ namespace StudioDataAccess
 					entity.Property(e => e.UserName).HasColumnType("TEXT");
 				});
 			}
-
-			builder.Entity<UserApp>()
-				.HasOne(e => e.UserProfile)
-				.WithOne(e => e.User)
-				.HasForeignKey<UserProfile>();
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

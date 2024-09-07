@@ -1,6 +1,6 @@
 ﻿using StudioModel.Domain;
 
-namespace StudioService
+namespace StudioService.Services
 {
     public interface IJwtService
     {

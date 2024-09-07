@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudioDataAccess.InterfaceDataAccess;
-using StudioModel.Abstraction;
+using StudioModel.Domain;
 using System.Linq.Expressions;
 
-namespace StudioDataAccess
+namespace StudioDataAccess.UOW.Imp
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
@@ -40,9 +40,9 @@ namespace StudioDataAccess
             return _entity.Find(id)!;
         }
 
-        public IEnumerable<T> GetActive(Func<T, bool> lamdaDelegate)
+        public IEnumerable<T> GetActive(Func<T, bool> expression)
         {
-            return _entity.Where(e => e.IsActive).Where(lamdaDelegate);
+            return _entity.Where(e => e.IsActive).Where(expression);
         }
 
         public void Add(T entity)

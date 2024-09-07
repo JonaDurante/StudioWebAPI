@@ -1,6 +1,6 @@
-﻿using StudioService;
-using StudioService.LoginService;
+﻿using StudioService.LoginService;
 using StudioService.LoginService.Imp;
+using StudioService.Services;
 
 namespace StudioBack.Dependency_Injection
 {

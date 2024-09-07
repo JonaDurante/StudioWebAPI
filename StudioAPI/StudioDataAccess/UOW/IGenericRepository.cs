@@ -18,7 +18,7 @@ namespace StudioDataAccess.InterfaceDataAccess
         /// </summary>
         /// <param name="GetActive"></param>
         /// <returns></returns>
-        IEnumerable<T> GetActive(Func<T, bool> lamdaDelegate);
+        IEnumerable<T> GetActive(Func<T, bool> expression);
         T GetById(Guid id);
         void Add(T entity);
         void Update(T entity);

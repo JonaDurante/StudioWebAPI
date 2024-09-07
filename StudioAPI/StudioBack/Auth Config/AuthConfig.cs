@@ -26,7 +26,7 @@ namespace StudioBack.IdentityExtensionsConfig
 
             services.AddAuthorization(option =>
                 option.AddPolicy("AdminPolicy", p =>
-                    p.RequireClaim(AuthorizationData.UserClaimName, AuthorizationData.Admin))
+                    p.RequireClaim("Role", AuthorizationData.Admin))
                 );
 
             services.AddAuthentication(options =>
@@ -43,11 +43,11 @@ namespace StudioBack.IdentityExtensionsConfig
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration[key: "JsonWebTokenKeys:IsUserSigninKey"]!)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration[key: "JWT:Key"]!)),
                     ValidateIssuer = false,
-                    ValidIssuer = builder.Configuration[key: "JsonWebTokenKeys:ValidIsUser"],
+                    ValidIssuer = builder.Configuration[key: "JWT:ValidIsUser"],
                     ValidateAudience = false,
-                    ValidAudience = builder.Configuration[key: "JsonWebTokenKeys:ValidAudience"],
+                    ValidAudience = builder.Configuration[key: "JWT:ValidAudience"],
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
                 };
