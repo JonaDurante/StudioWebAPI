@@ -1,18 +1,12 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using StudioBack.Dependency_Injection;
+using StudioBack.IdentityExtensionsConfig;
 using StudioBack.Middlewares;
 using StudioDataAccess;
 using StudioDataAccess.Seed;
-using StudioModel.Constant;
-using StudioModel.Domain;
 using System.Reflection;
-using System.Text;
 
 namespace StudioBack
 {
@@ -34,50 +28,11 @@ namespace StudioBack
                                    ?? throw new InvalidOperationException("Connection string 'StudioContextConnection' not found.");
             builder.Services.AddDbContext<StudioDBContext>(option => option.UseSqlite(connectionString));
 
-            builder.Services
-                .AddIdentity<UserApp, IdentityRole>(option =>
-                {
-                    option.SignIn.RequireConfirmedAccount = false;
-                    option.User.RequireUniqueEmail = true;
-                    option.User.AllowedUserNameCharacters =
-                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                })
-                .AddSignInManager<SignInManager<UserApp>>()
-                .AddEntityFrameworkStores<StudioDBContext>()
-                .AddDefaultTokenProviders();
+            builder.Services.ConfigureAuth(builder);
 
-            builder.Services.Register();
+            builder.Services.RegisterDependencies();
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
-
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-
-            }).AddJwtBearer(o =>
-            {
-                o.RequireHttpsMetadata = true;
-                o.SaveToken = true;
-
-                o.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration[key: "JsonWebTokenKeys:IsUserSigninKey"]!)),
-                    ValidateIssuer = false,
-                    ValidIssuer = builder.Configuration[key: "JsonWebTokenKeys:ValidIsUser"],
-                    ValidateAudience = false,
-                    ValidAudience = builder.Configuration[key: "JsonWebTokenKeys:ValidAudience"],
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
-
-            builder.Services.AddAuthorization(option =>
-                option.AddPolicy("AdminPolicy", p =>
-                    p.RequireClaim(AuthorizationData.UserClaimName, AuthorizationData.Admin))
-                );
 
             builder.Services.AddControllers();
 
