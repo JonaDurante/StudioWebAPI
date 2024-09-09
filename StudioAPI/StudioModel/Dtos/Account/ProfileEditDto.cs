@@ -1,10 +1,10 @@
-﻿using StudioModel.Dtos.User;
+﻿using StudioModel.Dtos.UserProfile;
 
 namespace StudioModel.Dtos.Account
 {
     public  class ProfileEditDto
     {
-        public ProfileDto userProfile { get; set; }
+        public UserProfileDto userProfile { get; set; }
         public string idUser { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Reflection.Emit;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StudioModel.Domain;
@@ -37,6 +38,13 @@ namespace StudioDataAccess
 					entity.Property(e => e.UserName).HasColumnType("TEXT");
 				});
 			}
+
+			builder.Entity<UserApp>()
+			.HasOne(e => e.UserProfile)
+			.WithOne(e => e.User)
+			.HasForeignKey<UserProfile>(e => e.IdUser)
+			.IsRequired(false);
+
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

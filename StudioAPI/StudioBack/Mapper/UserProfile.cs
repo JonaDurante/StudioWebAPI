@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using StudioModel.Domain;
 using StudioModel.Dtos.User;
+using StudioModel.Dtos.UserProfile;
 
 namespace StudioBack.Mapper
 {
@@ -9,7 +10,7 @@ namespace StudioBack.Mapper
         public UserProfile()
         {
             CreateMap<UserApp, UserDto>();
-            CreateMap<UserApp, ProfileDto>();
+            CreateMap<UserProfile, UserProfileDto>();
         }
     }
 }
