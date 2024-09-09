@@ -21,9 +21,9 @@ namespace StudioBack.Dependency_Injection
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IRoleService, RoleService>();
-            //services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

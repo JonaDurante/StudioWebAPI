@@ -11,7 +11,7 @@ using StudioDataAccess;
 namespace StudioDataAccess.Migrations
 {
     [DbContext(typeof(StudioDBContext))]
-    [Migration("20240909220324_Initial")]
+    [Migration("20240909223136_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -214,7 +214,7 @@ namespace StudioDataAccess.Migrations
 
             modelBuilder.Entity("StudioModel.Domain.UserProfile", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 

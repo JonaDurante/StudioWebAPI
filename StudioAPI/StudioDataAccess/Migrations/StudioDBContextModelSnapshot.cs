@@ -211,7 +211,7 @@ namespace StudioDataAccess.Migrations
 
             modelBuilder.Entity("StudioModel.Domain.UserProfile", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 

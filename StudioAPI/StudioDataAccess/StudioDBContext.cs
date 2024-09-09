@@ -37,7 +37,15 @@ namespace StudioDataAccess
 				{
 					entity.Property(e => e.UserName).HasColumnType("TEXT");
 				});
-			}
+
+                builder.Entity<UserProfile>(entity =>
+                {
+					Guid guid;
+                    entity.Property(e => e.Id).HasConversion(
+                        t => t.ToString(),
+                        t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");
+                });
+            }
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
