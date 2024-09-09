@@ -8,8 +8,9 @@ namespace StudioDataAccess
 	public class StudioDBContext : IdentityDbContext<UserApp>
 	{
 		private readonly ILoggerFactory _loggerFactory;
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
-		public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
+        public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
 		{
 			_loggerFactory = loggerFactory;
 		}

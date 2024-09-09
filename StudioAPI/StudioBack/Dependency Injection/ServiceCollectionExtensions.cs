@@ -1,4 +1,8 @@
-﻿using StudioService.LoginService;
+﻿using StudioDataAccess.Repositories;
+using StudioDataAccess.Repositories.Imp;
+using StudioDataAccess.Uow;
+using StudioDataAccess.Uow.Imp;
+using StudioService.LoginService;
 using StudioService.LoginService.Imp;
 using StudioService.Services;
 
@@ -17,6 +21,9 @@ namespace StudioBack.Dependency_Injection
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IRoleService, RoleService>();
+            //services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped<IUserProfileService, UserProfileService>();
 
             return services;
         }
