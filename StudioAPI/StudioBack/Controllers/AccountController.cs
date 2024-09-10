@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using StudioBack.Helppers;
-using StudioModel.Constant;
 using StudioModel.Dtos.Account;
 using StudioModel.Dtos.User;
 using StudioService.LoginService;

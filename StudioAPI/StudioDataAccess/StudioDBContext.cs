@@ -8,8 +8,9 @@ namespace StudioDataAccess
 	public class StudioDBContext : IdentityDbContext<UserApp>
 	{
 		private readonly ILoggerFactory _loggerFactory;
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
-		public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
+        public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
 		{
 			_loggerFactory = loggerFactory;
 		}
@@ -36,7 +37,15 @@ namespace StudioDataAccess
 				{
 					entity.Property(e => e.UserName).HasColumnType("TEXT");
 				});
-			}
+
+                builder.Entity<UserProfile>(entity =>
+                {
+					Guid guid;
+                    entity.Property(e => e.Id).HasConversion(
+                        t => t.ToString(),
+                        t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");
+                });
+            }
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
