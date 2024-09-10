@@ -11,7 +11,7 @@ using StudioDataAccess;
 namespace StudioDataAccess.Migrations
 {
     [DbContext(typeof(StudioDBContext))]
-    [Migration("20240831161904_Initial")]
+    [Migration("20240910225442_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
