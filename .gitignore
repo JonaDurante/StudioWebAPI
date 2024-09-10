@@ -46,3 +46,4 @@
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+*.vsidx

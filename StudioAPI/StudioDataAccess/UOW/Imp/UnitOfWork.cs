@@ -1,6 +1,6 @@
 ﻿using StudioDataAccess.InterfaceDataAccess;
 
-namespace StudioDataAccess
+namespace StudioDataAccess.UOW.Imp
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -13,7 +13,7 @@ namespace StudioDataAccess
 
         public void Dispose()
         {
-           _context.Dispose();
+            _context.Dispose();
         }
 
         public void Save()
