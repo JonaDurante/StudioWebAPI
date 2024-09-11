@@ -1,28 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudioDataAccess.InterfaceDataAccess;
 using StudioModel.Domain;
 using System.Linq.Expressions;
 
-namespace StudioDataAccess.UOW.Imp
+namespace StudioDataAccess.Repositories.Imp
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
         private readonly StudioDBContext _dbContext;
-        private readonly DbSet<T> _entity;
+        private readonly DbSet<T> entity;
 
-        public GenericRepository(StudioDBContext dbContext, DbSet<T> entity)
+        public GenericRepository(StudioDBContext dbContext)
         {
             _dbContext = dbContext;
-            _entity = _dbContext.Set<T>();
+            entity = _dbContext.Set<T>();
         }
-        public IQueryable<T> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return _entity;
+            return await entity.ToListAsync();
         }
 
         public IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive)
         {
-            IQueryable<T> query = _entity;
+            IQueryable<T> query = entity;
             if (isActive)
             {
                 query.Where(q => q.IsActive == isActive);
@@ -35,38 +34,39 @@ namespace StudioDataAccess.UOW.Imp
             return query;
         }
 
-        public T GetById(Guid id)
+        public async Task<T> GetById(Guid id)
         {
-            return _entity.Find(id)!;
+            return await entity.FindAsync(id);
         }
 
         public IEnumerable<T> GetActive(Func<T, bool> expression)
         {
-            return _entity.Where(e => e.IsActive).Where(expression);
+            return entity.Where(e => e.IsActive).Where(expression);
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            _entity.Add(entity);
+            await this.entity.AddAsync(entity);
         }
 
         public void Update(T entity)
         {
-            _entity.Update(entity);
+            this.entity.Update(entity);
         }
 
         public void LogicDelete(Guid id)
         {
-            var entity = GetById(id);
+            var entity = GetById(id).Result;
             if (entity != null)
             {
                 entity.IsActive = false;
-                _entity.Update(entity);
+                this.entity.Update(entity);
             }
         }
+
         public void Delete(T entity)
         {
-            _entity.Remove(entity);
+            this.entity.Remove(entity);
         }
     }
 }

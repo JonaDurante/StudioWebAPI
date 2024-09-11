@@ -1,16 +1,17 @@
-﻿using StudioDataAccess.InterfaceDataAccess;
+﻿using StudioDataAccess.Repositories;
 
-namespace StudioDataAccess.UOW.Imp
+namespace StudioDataAccess.Uow.Imp
 {
-	public class UnitOfWork : IUnitOfWork
-	{
-		private readonly StudioDBContext _context;
-		public IUserProfileRepository _userProfileRepository { get; }
-		public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository)
-		{
-			_context = context;
-			_userProfileRepository = userProfileRepository;
-		}
+    public class UnitOfWork : IUnitOfWork
+    {
+        private readonly StudioDBContext _context;
+        public IUserProfileRepository UserProfileRepository { get; }
+
+        public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository)
+        {
+            _context = context;
+            UserProfileRepository = userProfileRepository;
+        }
 
 		public void Dispose()
 		{

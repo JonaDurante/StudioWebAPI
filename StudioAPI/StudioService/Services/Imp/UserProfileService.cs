@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StudioDataAccess.InterfaceDataAccess;
+using StudioDataAccess.Uow;
 using StudioModel.Domain;
 using StudioModel.Dtos.UserProfile;
 
 namespace StudioService.Services.Imp
 {
-	public class UserProfileService : IUserProfileService
-	{
+    public class UserProfileService : IUserProfileService
+    {
 		private IUnitOfWork _unitOfWork { get; set; }
 		private readonly IMapper _mapper;
 		public UserProfileService(IUnitOfWork unitOfWork, IMapper mapper)
@@ -33,12 +34,14 @@ namespace StudioService.Services.Imp
 			_unitOfWork.Save();
 			return userProfile;
 		}
+        private readonly IUnitOfWork unitOfWork;
 
 		public async Task<UserProfile?> Update(Guid id, [FromBody] UserProfileDto userProfileDto)
 		{
 			var userProfileDB = await Get(id);
 			if (userProfileDB != null)
-			{
+        public UserProfileService(IUnitOfWork unitOfWork)
+        {
 				_mapper.Map(userProfileDto, userProfileDB);
 				_unitOfWork._userProfileRepository.Update(userProfileDB);
 				_unitOfWork.Save();
@@ -46,13 +49,16 @@ namespace StudioService.Services.Imp
 			}
 			return null;
 
-		}
+            this.unitOfWork = unitOfWork;
+        }
 		public async void Delete(Guid id)
-		{
+        public async Task<List<UserProfile>> GetAllUsers()
+        {
 			_unitOfWork._userProfileRepository.LogicDelete(id);
 			_unitOfWork.Save();
 			return;
-		}
+            return await unitOfWork.UserProfileRepository.GetAll();
+        }
 
-	}
+    }
 }
