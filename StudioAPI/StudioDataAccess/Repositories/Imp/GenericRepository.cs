@@ -46,7 +46,7 @@ namespace StudioDataAccess.Repositories.Imp
 
         public async Task Add(T entity)
         {
-            await this.entity.AddAsync(entity);
+            await this.entity.AddAsync(entity);//Ver mejora para otro menos para mi. Firma NicoB
         }
 
         public void Update(T entity)
