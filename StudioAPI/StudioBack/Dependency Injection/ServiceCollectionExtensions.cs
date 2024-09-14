@@ -23,6 +23,8 @@ namespace StudioBack.Dependency_Injection
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IVideoRepository, VideoRepository>();
+            services.AddScoped<IVideoService, VideoService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

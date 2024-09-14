@@ -9,6 +9,7 @@ namespace StudioDataAccess
 	{
 		private readonly ILoggerFactory _loggerFactory;
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Video> Video { get; set; }
 
         public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
 		{
@@ -41,6 +42,14 @@ namespace StudioDataAccess
                 builder.Entity<UserProfile>(entity =>
                 {
 					Guid guid;
+                    entity.Property(e => e.Id).HasConversion(
+                        t => t.ToString(),
+                        t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");
+                });
+
+                builder.Entity<Video>(entity =>
+                {
+                    Guid guid;
                     entity.Property(e => e.Id).HasConversion(
                         t => t.ToString(),
                         t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");

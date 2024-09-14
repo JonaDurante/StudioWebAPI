@@ -11,11 +11,7 @@ using StudioDataAccess;
 namespace StudioDataAccess.Migrations
 {
     [DbContext(typeof(StudioDBContext))]
-<<<<<<<< HEAD:StudioAPI/StudioDataAccess/Migrations/20240910225442_Initial.Designer.cs
-    [Migration("20240910225442_Initial")]
-========
-    [Migration("20240909223136_Initial")]
->>>>>>>> develop:StudioAPI/StudioDataAccess/Migrations/20240909223136_Initial.Designer.cs
+    [Migration("20240910234424_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -259,6 +255,49 @@ namespace StudioDataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserProfiles");
+                });
+
+            modelBuilder.Entity("StudioModel.Domain.Video", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Duration")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsVisible")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ThumbnailUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Video");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
