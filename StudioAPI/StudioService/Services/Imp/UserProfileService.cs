@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using StudioDataAccess.InterfaceDataAccess;
 using StudioDataAccess.Uow;
 using StudioModel.Domain;
 using StudioModel.Dtos.UserProfile;
 
 namespace StudioService.Services.Imp
 {
-    public class UserProfileService : IUserProfileService
-    {
-		private IUnitOfWork _unitOfWork { get; set; }
+	public class UserProfileService : IUserProfileService
+	{
+		private readonly IUnitOfWork _unitOfWork;
 		private readonly IMapper _mapper;
 		public UserProfileService(IUnitOfWork unitOfWork, IMapper mapper)
 		{
@@ -18,7 +17,8 @@ namespace StudioService.Services.Imp
 		}
 		public async Task<UserProfile?> Get(Guid id)
 		{
-			var userProfile = _unitOfWork._userProfileRepository.GetById(id);
+			var userProfile = _unitOfWork.UserProfileRepository.GetActive(up => up.Id == id).FirstOrDefault();
+
 			if (userProfile != null)
 			{
 				return userProfile;
@@ -29,36 +29,37 @@ namespace StudioService.Services.Imp
 		public async Task<UserProfile?> Create(Guid id, UserProfileDto userProfileDto)
 		{
 			var userProfile = _mapper.Map<UserProfile>(userProfileDto);
-			userProfile.IdUser = id;
-			_unitOfWork._userProfileRepository.Add(userProfile);
+
+			userProfile.IdUser = id.ToString();
+			_unitOfWork.UserProfileRepository.Add(userProfile);
 			_unitOfWork.Save();
 			return userProfile;
 		}
-        private readonly IUnitOfWork unitOfWork;
 
 		public async Task<UserProfile?> Update(Guid id, [FromBody] UserProfileDto userProfileDto)
 		{
 			var userProfileDB = await Get(id);
 			if (userProfileDB != null)
-        public UserProfileService(IUnitOfWork unitOfWork)
-        {
+			{
 				_mapper.Map(userProfileDto, userProfileDB);
-				_unitOfWork._userProfileRepository.Update(userProfileDB);
+				_unitOfWork.UserProfileRepository.Update(userProfileDB);
 				_unitOfWork.Save();
 				return userProfileDB;
 			}
 			return null;
+		}
 
-            this.unitOfWork = unitOfWork;
-        }
 		public async void Delete(Guid id)
-        public async Task<List<UserProfile>> GetAllUsers()
-        {
-			_unitOfWork._userProfileRepository.LogicDelete(id);
+		{
+			_unitOfWork.UserProfileRepository.LogicDelete(id);
 			_unitOfWork.Save();
 			return;
-            return await unitOfWork.UserProfileRepository.GetAll();
-        }
+		}
 
-    }
+		public async Task<List<UserProfile>> GetAllUsers()
+		{
+			return await _unitOfWork.UserProfileRepository.GetAll();
+		}
+
+	}
 }

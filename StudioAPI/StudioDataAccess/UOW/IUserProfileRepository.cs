@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StudioDataAccess.InterfaceDataAccess;
+﻿using StudioDataAccess.Repositories;
 using StudioModel.Domain;
 
 namespace StudioDataAccess.UOW

@@ -72,7 +72,7 @@ namespace StudioService.LoginService.Imp
             {
                 return user;
             }
-            _logger.LogError("User not found");
+            _logger.LogError("UserApp not found");
             return null;
         }
 
@@ -95,7 +95,7 @@ namespace StudioService.LoginService.Imp
                 }
             }
 
-            _logger.LogError("User not found");
+            _logger.LogError("UserApp not found");
             return null;
         }
 

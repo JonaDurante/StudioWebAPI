@@ -5,10 +5,11 @@ using StudioDataAccess.Uow.Imp;
 using StudioService.LoginService;
 using StudioService.LoginService.Imp;
 using StudioService.Services;
+using StudioService.Services.Imp;
 
 namespace StudioBack.Dependency_Injection
 {
-    public static class ServiceCollectionExtensions
+	public static class ServiceCollectionExtensions
     {
         public static IServiceCollection RegisterDependencies(this IServiceCollection services)
         {

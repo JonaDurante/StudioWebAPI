@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudioModel.Domain
 {
@@ -21,18 +22,21 @@ namespace StudioModel.Domain
 		[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
 		public DateTime BirthDate { get; set; }
 
-		[MaxLength(50)]
+		[MaxLength(30)]
 		public string Address { get; set; }
+
+		[DataType(DataType.PhoneNumber)]
+		public string? PhoneNumber { get; set; }
 
 		public DateTime RegistrationDate { get; set; } = DateTime.Now;
 
-		public DateTime LastClassDate { get; set; }
+		public DateTime? LastClassDate { get; set; }
 
 		[DataType(DataType.ImageUrl)]
 		public string? UserPhoto { get; set; }
 
-		[ForeignKey("User")]
-		public Guid IdUser { get; set; }
-		public UserApp User { get; set; }
+		[ForeignKey("UserApp")]
+		public string IdUser { get; set; }
+		public UserApp UserApp { get; set; }
 	}
 }
