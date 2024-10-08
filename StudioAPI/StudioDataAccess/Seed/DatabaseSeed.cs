@@ -46,7 +46,7 @@ namespace StudioDataAccess.Seed
 
                 if (createdUser.Succeeded)
                 {
-                    await Manager.AddToRoleAsync(testUser, "User");
+                    await Manager.AddToRoleAsync(testUser, "UserApp");
                 }
             }
 

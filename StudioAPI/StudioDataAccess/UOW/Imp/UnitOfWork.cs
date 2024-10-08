@@ -13,14 +13,14 @@ namespace StudioDataAccess.Uow.Imp
             UserProfileRepository = userProfileRepository;
         }
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
+		public void Dispose()
+		{
+			_context.Dispose();
+		}
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
-    }
+		public void Save()
+		{
+			_context.SaveChanges();
+		}
+	}
 }

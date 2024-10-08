@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StudioModel.Dtos.Account;
-using StudioModel.Dtos.User;
+using StudioModel.Dtos.UserProfile;
 using StudioService.LoginService;
 
 namespace StudioBack.Controllers
@@ -54,7 +54,7 @@ namespace StudioBack.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ProfileDto>(user));
+            return Ok(_mapper.Map<UserProfileDto>(user));
         }
 
         [HttpPost("EditUserData")]
