@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudioDataAccess;
 
@@ -10,9 +11,11 @@ using StudioDataAccess;
 namespace StudioDataAccess.Migrations
 {
     [DbContext(typeof(StudioDBContext))]
-    partial class StudioDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240928193425_EmailSettings")]
+    partial class EmailSettings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
@@ -151,16 +154,15 @@ namespace StudioDataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("AppPassword")
+                    b.Property<string>("AppPassWord")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Port")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

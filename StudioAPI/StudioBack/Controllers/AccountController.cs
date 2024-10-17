@@ -45,6 +45,19 @@ namespace StudioBack.Controllers
 			return StatusCode(500, "Internal server error");
 		}
 
+        [HttpPost("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            var confirmEmail = await _accountService.ConfirmEmail(userId, code);
+
+            if (confirmEmail != null)
+            {
+                return Ok(confirmEmail);
+            }
+
+            return Unauthorized("Invalid log");
+        }
+
         [HttpGet("GetUserDataById/{userId:guid}")]
         public async Task<IActionResult> GetUserDataById(Guid userId)
         {

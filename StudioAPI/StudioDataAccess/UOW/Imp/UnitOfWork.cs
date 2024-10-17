@@ -6,11 +6,13 @@ namespace StudioDataAccess.Uow.Imp
     {
         private readonly StudioDBContext _context;
         public IUserProfileRepository UserProfileRepository { get; }
+        public IEmailSettingsRepository EmailSettingsRepository { get; }
 
-        public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository)
+        public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository, IEmailSettingsRepository emailSettingsRepository)
         {
             _context = context;
             UserProfileRepository = userProfileRepository;
+            EmailSettingsRepository = emailSettingsRepository;
         }
 
         public void Dispose()
