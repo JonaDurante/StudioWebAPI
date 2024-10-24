@@ -55,6 +55,16 @@ namespace StudioDataAccess
 						.WithOne().HasForeignKey<UserProfile>(e => e.IdUser).HasPrincipalKey<UserApp>(e => e.Id);
 				});
 			}
+
+			builder.Entity<Enrollments>()
+				.HasOne(e => e.User)
+				.WithMany(u => u.Enrollments)
+				.HasForeignKey(e => e.UserAppId);
+
+			builder.Entity<Enrollments>()
+				.HasOne(e => e.Course)
+				.WithMany(c => c.Enrollments)
+				.HasForeignKey(e => e.CourseId);
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

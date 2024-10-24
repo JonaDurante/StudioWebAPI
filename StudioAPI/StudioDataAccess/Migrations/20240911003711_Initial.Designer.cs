@@ -81,13 +81,13 @@ namespace StudioDataAccess.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserAppId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserAppId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
@@ -103,26 +103,26 @@ namespace StudioDataAccess.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserAppId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserAppId");
 
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserAppId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.HasKey("UserAppId", "RoleId");
 
                     b.HasIndex("RoleId");
 
@@ -131,7 +131,7 @@ namespace StudioDataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserAppId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
@@ -143,7 +143,7 @@ namespace StudioDataAccess.Migrations
                     b.Property<string>("Value")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                    b.HasKey("UserAppId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
@@ -281,7 +281,7 @@ namespace StudioDataAccess.Migrations
                 {
                     b.HasOne("StudioModel.Domain.UserApp", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserAppId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -290,7 +290,7 @@ namespace StudioDataAccess.Migrations
                 {
                     b.HasOne("StudioModel.Domain.UserApp", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserAppId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -305,7 +305,7 @@ namespace StudioDataAccess.Migrations
 
                     b.HasOne("StudioModel.Domain.UserApp", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserAppId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -314,7 +314,7 @@ namespace StudioDataAccess.Migrations
                 {
                     b.HasOne("StudioModel.Domain.UserApp", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserAppId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
