@@ -1,15 +1,12 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Serilog;
-using StudioDataAccess;
-using StudioModel.Domain;
-using StudioService;
-using StudioService.LoginService;
-using StudioService.LoginService.Imp;
-using System.Reflection;
-using StudioDataAccess.InterfaceDataAccess;
 using StudioBack.Dependency_Injection;
+using StudioBack.IdentityExtensionsConfig;
 using StudioBack.Middlewares;
+using StudioDataAccess;
+using StudioDataAccess.Seed;
+using System.Reflection;
 
 namespace StudioBack
 {
@@ -19,54 +16,55 @@ namespace StudioBack
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            #region Serilog
             builder.Host.UseSerilog((HostBuilderCtx, LoggerConf) =>
             {
                 LoggerConf
-                    .WriteTo.Console() // Escribe en la consola
-                    .WriteTo.Debug()   // Escriba en debug
+                    .WriteTo.Console()
+                    .WriteTo.Debug()
                     .ReadFrom.Configuration(HostBuilderCtx.Configuration);
             });
-            #endregion
 
-            #region Service for entity framework
-            var connectionString = builder.Configuration.GetConnectionString("StudioContextConnection")
+            var connectionString = builder.Configuration.GetConnectionString("SqlLiteConnection")
                                    ?? throw new InvalidOperationException("Connection string 'StudioContextConnection' not found.");
-            builder.Services.AddDbContext<StudioDBContext>(option => option.UseSqlServer(connectionString));
-            #endregion
+            builder.Services.AddDbContext<StudioDBContext>(option => option.UseSqlite(connectionString));
 
-            #region Identity
-            builder.Services
-                .AddIdentity<UserApp, IdentityRole>(option =>
-                {
-                    option.SignIn.RequireConfirmedAccount = false;
-                    option.User.RequireUniqueEmail = true;
-                    option.User.AllowedUserNameCharacters =
-                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                })
-                .AddSignInManager<SignInManager<UserApp>>()
-                .AddEntityFrameworkStores<StudioDBContext>()
-                .AddDefaultTokenProviders();
-            #endregion
+            builder.Services.ConfigureAuth(builder);
 
-            #region Injection Dependency
-
-            builder.Services.Register();
-
-            #endregion
-
-            #region Automapper
+            builder.Services.RegisterDependencies();
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
 
-            #endregion
-
-            builder.Services.AddAuthentication();
-
             builder.Services.AddControllers();
-            
+
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Autorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization Header"
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{ }
+                    }
+                });
+            });
 
             builder.Services.AddCors(options =>
             {
@@ -78,7 +76,7 @@ namespace StudioBack
             });
 
             var app = builder.Build();
-            
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -89,13 +87,19 @@ namespace StudioBack
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseCors(x => x.AllowAnyOrigin());
 
-            app.UseAuthentication();
-
             app.MapControllers();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                DatabaseSeed.SeedUsersAsync(services).GetAwaiter().GetResult();
+            }
 
             app.Run();
         }

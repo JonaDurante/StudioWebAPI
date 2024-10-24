@@ -1,26 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
 
 namespace StudioModel.Domain
 {
-    public class UserApp : IdentityUser
-    {
-        [PersonalData]
-        [Column(TypeName = "nvarchar(100)")]
-        public string CustomUserName { get; set; }
+	public class UserApp : IdentityUser
+	{
+		[NotMapped]
+		public string Role { get; set; }
 
-        [PersonalData]
-        [Column(TypeName = "varchar(MAX)")]
-        public string UserPhoto { get; set; }
-
-        [PersonalData]
-        [Column(TypeName = "Datetime")]
-        [DisplayFormat(DataFormatString = "DD/MM/YYYY")]
-        public DateTime Birthday { get; set; }
-
-        [NotMapped]
-        public string Role { get; set; }
-    }
+		public UserProfile? UserProfile { get; set; }
+	}
 }

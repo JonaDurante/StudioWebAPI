@@ -1,4 +1,6 @@
-﻿namespace StudioDataAccess.InterfaceDataAccess
+﻿using StudioDataAccess.Repositories;
+
+namespace StudioDataAccess.Uow
 {
     public interface IUnitOfWork : IDisposable
     {
@@ -11,6 +13,7 @@
         /// services.AddScoped<IProductRepository, ProductRepository>();
         /// </summary>
 
+        IUserProfileRepository UserProfileRepository { get; }
         void Save();
     }
 }
