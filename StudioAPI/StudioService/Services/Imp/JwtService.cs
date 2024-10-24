@@ -19,8 +19,8 @@ namespace StudioService.LoginService.Imp
         public UserToken GeneratedToken(UserApp userApp)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration[key:"JWT:Key"]!);                      
-            double.TryParse(_configuration[key: "JWT:ExpiredTime"], out var expiredTimeDay);            
+            var key = Encoding.ASCII.GetBytes(_configuration[key: "JWT:Key"]!);
+            double.TryParse(_configuration[key: "JWT:ExpiredTime"], out var expiredTimeDay);
             var expiredTime = DateTime.UtcNow.AddDays(expiredTimeDay);
 
             var tokenDescriptor = new SecurityTokenDescriptor()
@@ -28,7 +28,7 @@ namespace StudioService.LoginService.Imp
                 Expires = expiredTime,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature),
-                Subject = new ClaimsIdentity(new [] {new Claim("Id", userApp.Id), 
+                Subject = new ClaimsIdentity(new[] {new Claim("Id", userApp.Id),
                     new Claim("Role", userApp.Role.ToLower())})
             };
 
@@ -51,39 +51,32 @@ namespace StudioService.LoginService.Imp
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["JWT:Key"]!);
 
-            try
+            var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
             {
-                var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero 
-                }, out SecurityToken validatedToken);
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            }, out SecurityToken validatedToken);
 
-                if (validatedToken is JwtSecurityToken jwtToken)
-                {
-                    var userId = principal.FindFirst("Id")?.Value;
-                    var role = principal.FindFirst("Role")?.Value;
+            if (validatedToken is JwtSecurityToken jwtToken)
+            {
+                var userId = principal.FindFirst("Id")?.Value;
+                var role = principal.FindFirst("Role")?.Value;
 
-                    if (userId != null && role != null)
+                if (userId != null && role != null)
+                {
+                    var userApp = new UserApp
                     {
-                        var userApp = new UserApp
-                        {
-                            Id = userId,
-                            Role = role
-                        };
-                        return GeneratedToken(userApp); 
-                    }
+                        Id = userId,
+                        Role = role
+                    };
+                    return GeneratedToken(userApp);
                 }
             }
-            catch (SecurityTokenException)
-            {
-                  throw new SecurityTokenException("Token inválido o expirado");
-            }
 
-            throw new SecurityTokenException("No se pudo refrescar el token");
+            return new UserToken();
         }
 
     }
