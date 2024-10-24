@@ -46,5 +46,45 @@ namespace StudioService.LoginService.Imp
                 Validity = expiredTime - DateTime.UtcNow
             };
         }
+        public UserToken RefreshToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["JWT:Key"]!);
+
+            try
+            {
+                var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero 
+                }, out SecurityToken validatedToken);
+
+                if (validatedToken is JwtSecurityToken jwtToken)
+                {
+                    var userId = principal.FindFirst("Id")?.Value;
+                    var role = principal.FindFirst("Role")?.Value;
+
+                    if (userId != null && role != null)
+                    {
+                        var userApp = new UserApp
+                        {
+                            Id = userId,
+                            Role = role
+                        };
+                        return GeneratedToken(userApp); 
+                    }
+                }
+            }
+            catch (SecurityTokenException)
+            {
+                  throw new SecurityTokenException("Token inválido o expirado");
+            }
+
+            throw new SecurityTokenException("No se pudo refrescar el token");
+        }
+
     }
 }
