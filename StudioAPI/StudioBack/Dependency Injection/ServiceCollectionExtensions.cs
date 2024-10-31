@@ -23,8 +23,13 @@ namespace StudioBack.Dependency_Injection
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddTransient<IEmailService, EmailService>();
+
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IEmailSettingsRepository, EmailSettingsRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
             return services;
         }

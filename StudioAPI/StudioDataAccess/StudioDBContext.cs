@@ -9,6 +9,7 @@ namespace StudioDataAccess
 	{
 		private readonly ILoggerFactory _loggerFactory;
 		public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<EmailSetting> EmailSettings { get; set; }
 
 		public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
 		{
