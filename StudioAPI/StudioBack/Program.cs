@@ -98,7 +98,7 @@ namespace StudioBack
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                DatabaseSeed.SeedUsersAsync(services).GetAwaiter().GetResult();
+                DatabaseSeed.SeedUsersAsync(services, builder.Configuration).GetAwaiter().GetResult();
             }
 
             app.Run();

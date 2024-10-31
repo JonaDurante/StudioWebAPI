@@ -30,7 +30,6 @@ namespace StudioBack.Dependency_Injection
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
             return services;
         }
     }
