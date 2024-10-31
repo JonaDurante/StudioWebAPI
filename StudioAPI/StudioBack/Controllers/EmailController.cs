@@ -16,15 +16,8 @@ namespace StudioBack.Controllers
         [HttpPost]
         public IActionResult SendMail(EmailDto emailDto)
         {
-            try
-            {
-                _emailService.SendEmail(emailDto.Subject, emailDto.Body, emailDto.To);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            _emailService.SendEmail(emailDto.Subject, emailDto.Body, emailDto.To);
+            return Ok();
         }
     }
 }
