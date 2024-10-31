@@ -10,6 +10,6 @@ namespace StudioModel.Domain
 
 		public UserProfile? UserProfile { get; set; }
 
-		public ICollection<Enrollments> Enrollments { get; set; }
+		public ICollection<Enrollment> Enrollments { get; set; }
 	}
 }

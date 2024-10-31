@@ -10,7 +10,7 @@ namespace StudioService.Services.Imp
 {
 	public class CourseService : ICourseService
 	{
-		public Task<Courses?> Create(Guid id, UserProfileDto userProfileDto)
+		public Task<Course?> Create(Guid id, UserProfileDto userProfileDto)
 		{
 			throw new NotImplementedException();
 		}
@@ -20,17 +20,17 @@ namespace StudioService.Services.Imp
 			throw new NotImplementedException();
 		}
 
-		public Task<Courses?> Get(Guid id)
+		public Task<Course?> Get(Guid id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<List<Courses>> GetAll()
+		public Task<List<Course>> GetAll()
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Courses?> Update(Guid id, UserProfileDto userProfileDto)
+		public Task<Course?> Update(Guid id, UserProfileDto userProfileDto)
 		{
 			throw new NotImplementedException();
 		}

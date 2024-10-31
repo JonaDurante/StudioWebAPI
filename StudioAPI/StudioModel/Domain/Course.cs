@@ -2,7 +2,7 @@
 
 namespace StudioModel.Domain
 {
-	public class Courses
+	public class Course
 	{
 		[Key]
 		public Guid Id { get; set; }
@@ -18,7 +18,7 @@ namespace StudioModel.Domain
 		[Required]
 		public string Level { get; set; }
 
-		public ICollection<Enrollments> Enrollments { get; set; }
+		public ICollection<Enrollment> Enrollments { get; set; }
 
 	}
 }

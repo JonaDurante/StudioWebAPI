@@ -10,10 +10,10 @@ namespace StudioService.Services
 {
 	public interface ICourseService
 	{
-		Task<List<Courses>> GetAll();
-		Task<Courses?> Get(Guid id);
-		Task<Courses?> Create(Guid id, UserProfileDto userProfileDto);
-		Task<Courses?> Update(Guid id, UserProfileDto userProfileDto);
+		Task<List<Course>> GetAll();
+		Task<Course?> Get(Guid id);
+		Task<Course?> Create(Guid id, UserProfileDto userProfileDto);
+		Task<Course?> Update(Guid id, UserProfileDto userProfileDto);
 		void Delete(Guid id);
 	}
 }

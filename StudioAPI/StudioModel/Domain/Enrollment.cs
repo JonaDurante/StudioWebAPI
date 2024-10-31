@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudioModel.Domain
 {
-	public class Enrollments
+	public class Enrollment
 	{
 		[Key]
 		public Guid Id { get; set; }
@@ -11,10 +11,13 @@ namespace StudioModel.Domain
 		[Required]
 		[DataType(DataType.DateTime)]
 		public DateTime EnrollmentDate { get; set; }
-
-		public string UserAppId { get; set; }
+		
+		[Required]
+		public string UserId { get; set; }
 		public UserApp User { get; set; }
+
+		[Required]
 		public Guid CourseId { get; set; }
-		public Courses Course { get; set; }
+		public Course Course { get; set; }
 	}
 }

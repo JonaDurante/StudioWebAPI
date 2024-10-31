@@ -9,6 +9,8 @@ namespace StudioDataAccess
 	{
 		private readonly ILoggerFactory _loggerFactory;
 		public DbSet<UserProfile> UserProfiles { get; set; }
+		public DbSet<Course> Courses { get; set; }
+		public DbSet<Enrollment> Enrollments { get; set; }
 
 		public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
 		{
@@ -56,12 +58,12 @@ namespace StudioDataAccess
 				});
 			}
 
-			builder.Entity<Enrollments>()
+			builder.Entity<Enrollment>()
 				.HasOne(e => e.User)
 				.WithMany(u => u.Enrollments)
-				.HasForeignKey(e => e.UserAppId);
+				.HasForeignKey(e => e.UserId);
 
-			builder.Entity<Enrollments>()
+			builder.Entity<Enrollment>()
 				.HasOne(e => e.Course)
 				.WithMany(c => c.Enrollments)
 				.HasForeignKey(e => e.CourseId);
