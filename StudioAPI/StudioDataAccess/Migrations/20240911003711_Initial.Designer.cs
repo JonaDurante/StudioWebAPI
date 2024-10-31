@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudioDataAccess;
 
@@ -10,9 +11,11 @@ using StudioDataAccess;
 namespace StudioDataAccess.Migrations
 {
     [DbContext(typeof(StudioDBContext))]
-    partial class StudioDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240911003711_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
@@ -145,29 +148,6 @@ namespace StudioDataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("StudioModel.Domain.EmailSetting", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AppPassword")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Port")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmailSettings");
-                });
-
             modelBuilder.Entity("StudioModel.Domain.UserApp", b =>
                 {
                     b.Property<string>("Id")
@@ -204,6 +184,12 @@ namespace StudioDataAccess.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
@@ -239,7 +225,7 @@ namespace StudioDataAccess.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(30)
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("BirthDate")
@@ -256,15 +242,12 @@ namespace StudioDataAccess.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("LastClassDate")
+                    b.Property<DateTime>("LastClassDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("RegistrationDate")
