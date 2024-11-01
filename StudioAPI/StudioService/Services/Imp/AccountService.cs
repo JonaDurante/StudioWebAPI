@@ -69,6 +69,7 @@ namespace StudioService.LoginService.Imp
                     var body = $"Por favor confirma tu cuenta haciendo clic en el siguiente enlace: <a href='{HtmlEncoder.Default.Encode(confirmEmailUrl)}'>Confirmar Email</a>";
 
                     _emailService.SendEmail(subject, body, userLoginDto.Email);
+                    return new UserToken();
                 }
             }
             return null;
