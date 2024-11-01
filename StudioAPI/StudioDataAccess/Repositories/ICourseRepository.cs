@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StudioModel.Domain;
 
 namespace StudioDataAccess.Repositories
 {
-	public interface ICourseRepository
+	public interface ICourseRepository : IGenericRepository<Course>
 	{
 
 	}

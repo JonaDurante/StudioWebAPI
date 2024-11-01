@@ -1,23 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using StudioDataAccess.Uow;
 using StudioModel.Domain;
-using StudioModel.Dtos.UserProfile;
+using StudioModel.Dtos.Course;
 
 namespace StudioService.Services.Imp
 {
 	public class CourseService : ICourseService
 	{
-		public Task<Course?> Create(Guid id, UserProfileDto userProfileDto)
+		private readonly IUnitOfWork _unitOfWork;
+		private readonly IMapper _mapper;
+		public CourseService(IUnitOfWork unitOfWork, IMapper mapper)
+		{
+			_unitOfWork = unitOfWork;
+			_mapper = mapper;
+		}
+		public Task<Course?> Create(Guid id, CourseDto courseDto)
 		{
 			throw new NotImplementedException();
 		}
 
 		public void Delete(Guid id)
 		{
-			throw new NotImplementedException();
+			_unitOfWork.CourseRepository.LogicDelete(id);
+			_unitOfWork.Save();
+			return;
 		}
 
 		public Task<Course?> Get(Guid id)
@@ -25,12 +31,12 @@ namespace StudioService.Services.Imp
 			throw new NotImplementedException();
 		}
 
-		public Task<List<Course>> GetAll()
+		public async Task<List<Course>> GetAll()
 		{
-			throw new NotImplementedException();
+			return await _unitOfWork.CourseRepository.GetAll();
 		}
 
-		public Task<Course?> Update(Guid id, UserProfileDto userProfileDto)
+		public Task<Course?> Update(Guid id, CourseDto courseDto)
 		{
 			throw new NotImplementedException();
 		}

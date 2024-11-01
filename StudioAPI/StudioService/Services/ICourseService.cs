@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StudioModel.Domain;
-using StudioModel.Dtos.UserProfile;
+﻿using StudioModel.Domain;
+using StudioModel.Dtos.Course;
 
 namespace StudioService.Services
 {
@@ -12,8 +7,8 @@ namespace StudioService.Services
 	{
 		Task<List<Course>> GetAll();
 		Task<Course?> Get(Guid id);
-		Task<Course?> Create(Guid id, UserProfileDto userProfileDto);
-		Task<Course?> Update(Guid id, UserProfileDto userProfileDto);
+		Task<Course?> Create(Guid id, CourseDto courseDto);
+		Task<Course?> Update(Guid id, CourseDto courseDto);
 		void Delete(Guid id);
 	}
 }
