@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
 using StudioService.Services;
+using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -16,6 +19,10 @@ namespace StudioService.LoginService.Imp
         private readonly ILogger<AccountService> _logger;
         private readonly IJwtService _jwtService;
         private readonly IEmailService _emailService;
+
+        private const string ConfirmEmailUrl = "https://localhost:7253/Account/ConfirmEmail?confirmationTokenString={0}";
+        private const string Subject = "Confirma tu email";
+        private const string Body = "Por favor confirma tu cuenta haciendo click en el siguiente enlace: <a href='{0}'>Confirmar Email</a>";
 
         public AccountService(SignInManager<UserApp> signInManager, UserManager<UserApp> userManager, ILogger<AccountService> logger, IJwtService jwtService, IEmailService emailService)
         {
@@ -45,7 +52,7 @@ namespace StudioService.LoginService.Imp
             return null;
         }
 
-        public async Task<UserToken?> Register(UserRegisterDto userLoginDto)
+        public async Task<IActionResult> Register(UserRegisterDto userLoginDto)
         {
             var user = new UserApp()
             {
@@ -59,35 +66,50 @@ namespace StudioService.LoginService.Imp
                 var addRolResult = await _userManager.AddToRoleAsync(user, "user");
                 if (addRolResult.Succeeded)
                 {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    ConfirmationToken confirmationToken = new()
+                    {
+                        UserId = await _userManager.GetUserIdAsync(user),
+                        Code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code))
+                    };
 
-                    var confirmEmailUrl = $"https://localhost:7253/Account/ConfirmEmail?userId={userId}&code={code}";
+                    string? confirmationTokenJson = JsonConvert.SerializeObject(confirmationToken);
+                    byte[] bytes = Encoding.ASCII.GetBytes(confirmationTokenJson);
+                    string confirmationTokenString = Convert.ToBase64String(bytes);
 
-                    var subject = "Confirma tu email";
-                    var body = $"Por favor confirma tu cuenta haciendo clic en el siguiente enlace: <a href='{HtmlEncoder.Default.Encode(confirmEmailUrl)}'>Confirmar Email</a>";
+                    string confirmEmailUrl = string.Format(ConfirmEmailUrl, confirmationTokenString);
+                    string body = string.Format(Body, HtmlEncoder.Default.Encode(confirmEmailUrl));
 
-                    _emailService.SendEmail(subject, body, userLoginDto.Email);
+                    _emailService.SendEmail(Subject, body, userLoginDto.Email);
+                    return new OkResult();
                 }
             }
-            return null;
+            return new BadRequestObjectResult(new { Errors = createResult.Errors.Select(x => x.Description).ToList() });
         }
 
-        public async Task<UserToken?> ConfirmEmail(string userId, string code)
+        public async Task<UserToken?> ConfirmEmail(string confirmationTokenString)
         {
-            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(code))
+            byte[] bytes = Convert.FromBase64String(confirmationTokenString);
+            string confirmationTokenJson = Encoding.ASCII.GetString(bytes);
+            var confirmationToken = JsonConvert.DeserializeObject<ConfirmationToken>(confirmationTokenJson);
+
+            if (confirmationToken == null)
             {
                 return null;
             }
 
-            var user = await _userManager.FindByIdAsync(userId);
+            if (string.IsNullOrEmpty(confirmationToken.UserId) || string.IsNullOrEmpty(confirmationToken.Code))
+            {
+                return null;
+            }
+
+            var user = await _userManager.FindByIdAsync(confirmationToken.UserId);
             if (user == null)
             {
                 return null;
             }
 
-            var decodedCode = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+            var decodedCode = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(confirmationToken.Code));
             var result = await _userManager.ConfirmEmailAsync(user, decodedCode);
             if (result.Succeeded)
             {

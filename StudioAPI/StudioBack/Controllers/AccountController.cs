@@ -35,20 +35,13 @@ namespace StudioBack.Controllers
 		[HttpPost("Register")]
 		public async Task<IActionResult> Register([FromBody] UserRegisterDto userLoginDto)
 		{
-			var registerResult = await _accountService.Register(userLoginDto);
-
-            if (registerResult != null)
-            {
-                return Ok(registerResult);
-            }
-
-			return StatusCode(500, "Internal server error");
+            return await _accountService.Register(userLoginDto);
 		}
 
         [HttpPost("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public async Task<IActionResult> ConfirmEmail(string confirmationTokenString)
         {
-            var confirmEmail = await _accountService.ConfirmEmail(userId, code);
+            var confirmEmail = await _accountService.ConfirmEmail(confirmationTokenString);
 
             if (confirmEmail != null)
             {
@@ -58,8 +51,8 @@ namespace StudioBack.Controllers
             return Unauthorized("Invalid log");
         }
 
-        [HttpGet("GetUserDataById/{userId:guid}")]
-        public async Task<IActionResult> GetUserDataById(Guid userId)
+        [HttpGet("GetUserDataById")]
+        public async Task<IActionResult> GetUserDataById([FromBody]Guid userId)
         {
             var user = await _accountService.GetUserData(userId);
             if (user == null)
