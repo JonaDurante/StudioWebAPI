@@ -7,7 +7,7 @@ namespace StudioService.LoginService
 	public interface IAccountService
 	{
 		Task<UserToken?> Login(UserLoginDto userLoginDto);
-		Task<bool> Register(UserRegisterDto userLoginDto);
+        Task<IActionResult> Register(UserRegisterDto userLoginDto);
 		Task<UserToken?> ConfirmEmail(string confirmationToken);
         Task<UserApp?> GetUserData(Guid userId);
 		Task<UserToken?> EditUserData(ProfileEditDto userLoginDto);

@@ -35,12 +35,7 @@ namespace StudioBack.Controllers
 		[HttpPost("Register")]
 		public async Task<IActionResult> Register([FromBody] UserRegisterDto userLoginDto)
 		{
-            if (await _accountService.Register(userLoginDto))
-            {
-                return Ok();
-            }
-
-			return BadRequest();
+            return await _accountService.Register(userLoginDto);
 		}
 
         [HttpPost("ConfirmEmail")]

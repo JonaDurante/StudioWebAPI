@@ -2,12 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
 using StudioService.Services;
-using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -20,6 +19,10 @@ namespace StudioService.LoginService.Imp
         private readonly ILogger<AccountService> _logger;
         private readonly IJwtService _jwtService;
         private readonly IEmailService _emailService;
+
+        private const string ConfirmEmailUrl = "https://localhost:7253/Account/ConfirmEmail?confirmationTokenString={0}";
+        private const string Subject = "Confirma tu email";
+        private const string Body = "Por favor confirma tu cuenta haciendo click en el siguiente enlace: <a href='{0}'>Confirmar Email</a>";
 
         public AccountService(SignInManager<UserApp> signInManager, UserManager<UserApp> userManager, ILogger<AccountService> logger, IJwtService jwtService, IEmailService emailService)
         {
@@ -49,7 +52,7 @@ namespace StudioService.LoginService.Imp
             return null;
         }
 
-        public async Task<bool> Register(UserRegisterDto userLoginDto)
+        public async Task<IActionResult> Register(UserRegisterDto userLoginDto)
         {
             var user = new UserApp()
             {
@@ -74,16 +77,14 @@ namespace StudioService.LoginService.Imp
                     byte[] bytes = Encoding.ASCII.GetBytes(confirmationTokenJson);
                     string confirmationTokenString = Convert.ToBase64String(bytes);
 
-                    var confirmEmailUrl = $"https://localhost:7253/Account/ConfirmEmail?confirmationTokenString={confirmationTokenString}";
+                    string confirmEmailUrl = string.Format(ConfirmEmailUrl, confirmationTokenString);
+                    string body = string.Format(Body, HtmlEncoder.Default.Encode(confirmEmailUrl));
 
-                    var subject = "Confirma tu email";
-                    var body = $"Por favor confirma tu cuenta haciendo clic en el siguiente enlace: <a href='{HtmlEncoder.Default.Encode(confirmEmailUrl)}'>Confirmar Email</a>";
-
-                    _emailService.SendEmail(subject, body, userLoginDto.Email);
-                    return true;
+                    _emailService.SendEmail(Subject, body, userLoginDto.Email);
+                    return new OkResult();
                 }
             }
-            return false;
+            return new BadRequestObjectResult(new { Errors = createResult.Errors.Select(x => x.Description).ToList() });
         }
 
         public async Task<UserToken?> ConfirmEmail(string confirmationTokenString)
