@@ -5,10 +5,11 @@ using StudioDataAccess.Uow.Imp;
 using StudioService.LoginService;
 using StudioService.LoginService.Imp;
 using StudioService.Services;
+using StudioService.Services.Imp;
 
 namespace StudioBack.Dependency_Injection
 {
-    public static class ServiceCollectionExtensions
+	public static class ServiceCollectionExtensions
     {
         public static IServiceCollection RegisterDependencies(this IServiceCollection services)
         {
@@ -22,9 +23,13 @@ namespace StudioBack.Dependency_Injection
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddTransient<IEmailService, EmailService>();
+
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IVideoRepository, VideoRepository>();
             services.AddScoped<IVideoService, VideoService>();
+            services.AddScoped<IEmailSettingsRepository, EmailSettingsRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
