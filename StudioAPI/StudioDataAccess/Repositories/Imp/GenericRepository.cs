@@ -68,5 +68,6 @@ namespace StudioDataAccess.Repositories.Imp
         {
             this.entity.Remove(entity);
         }
-    }
+
+	}
 }

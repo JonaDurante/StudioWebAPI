@@ -10,6 +10,8 @@ namespace StudioModel.Dtos.Enrollment
 {
 	public class EnrollmentDto
 	{
+		[Required]
+		[DataType(DataType.DateTime)]
 		public DateTime EnrollmentDate { get; set; }
 		public string UserId { get; set; }
 		public Guid CourseId { get; set; }

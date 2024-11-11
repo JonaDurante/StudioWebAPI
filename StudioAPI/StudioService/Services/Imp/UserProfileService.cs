@@ -31,7 +31,7 @@ namespace StudioService.Services.Imp
 			var userProfile = _mapper.Map<UserProfile>(userProfileDto);
 
 			userProfile.IdUser = id.ToString();
-			_unitOfWork.UserProfileRepository.Add(userProfile);
+			await _unitOfWork.UserProfileRepository.Add(userProfile);
 			_unitOfWork.Save();
 			return userProfile;
 		}

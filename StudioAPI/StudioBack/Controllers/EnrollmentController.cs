@@ -14,27 +14,34 @@ namespace StudioBack.Controllers
 			_enrollmentService = enrollmentService;
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> Get()
+		[HttpGet("Get")]
+		public async Task<IActionResult> Get(Guid id)
 		{
-			return Ok();
+			var enrollments = _enrollmentService.GetAllEnrollmentsByUser(id);
+			return Ok(enrollments);
 		}
 
-		[HttpPost]
+		[HttpPost("Insert")]
 		public async Task<IActionResult> Create(Guid id, [FromBody] EnrollmentDto enrollmentDto)
 		{
-			if (ModelState.IsValid)
+			if (enrollmentDto.EnrollmentDate > DateTime.Now)
 			{
-				var enrollment = _enrollmentService.Create(id, enrollmentDto);
-				return Ok(enrollmentDto);
+				if (!string.IsNullOrWhiteSpace(id.ToString()) || enrollmentDto != null)
+				{
+					var enrollment = _enrollmentService.Create(id, enrollmentDto);
+					return Ok(enrollmentDto);
+				}
 			}
-			return BadRequest();
+			//return BadRequest();
+			throw new Exception("La fecha debe ser mayor al dia de hoy");
 		}
 
-		[HttpDelete]
-		public async Task<IActionResult> Delete()
+		[HttpDelete("Delete")]
+		public async Task<IActionResult> Delete(Guid id)
 		{
+			_enrollmentService.Delete(id);
 			return Ok();
 		}
+
 	}
 }
