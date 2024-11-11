@@ -14,21 +14,36 @@ namespace StudioService.Services.Imp
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 		}
-		public Task<Course?> Create(Guid id, CourseDto courseDto)
+		public async Task<Course> Create(Guid id, CourseDto courseDto)
 		{
-			throw new NotImplementedException();
+			var course = _mapper.Map<Course>(courseDto);
+
+			if (course != null)
+			{
+				await _unitOfWork.CourseRepository.Add(course);
+				_unitOfWork.Save();
+				return course;
+			}
+			return null;
 		}
 
 		public void Delete(Guid id)
 		{
+			//AGREGAR LOGICA PARA EVITAR BORRAR CURSOS CON ALUMNOS INSCRIPTOS
 			_unitOfWork.CourseRepository.LogicDelete(id);
 			_unitOfWork.Save();
 			return;
 		}
 
-		public Task<Course?> Get(Guid id)
+		public async Task<Course> GetById(Guid id)
 		{
-			throw new NotImplementedException();
+			var course = _unitOfWork.CourseRepository.GetActive(up => up.Id == id).FirstOrDefault();
+
+			if (course != null)
+			{
+				return course;
+			}
+			return null;
 		}
 
 		public async Task<List<Course>> GetAll()
@@ -36,9 +51,17 @@ namespace StudioService.Services.Imp
 			return await _unitOfWork.CourseRepository.GetAll();
 		}
 
-		public Task<Course?> Update(Guid id, CourseDto courseDto)
+		public async Task<Course> Update(Guid id, CourseDto courseDto)
 		{
-			throw new NotImplementedException();
+			var course = await GetById(id);
+			if (course != null)
+			{
+				_mapper.Map(courseDto, course);
+				_unitOfWork.CourseRepository.Update(course);
+				_unitOfWork.Save();
+				return course;
+			}
+			return null;
 		}
 	}
 }

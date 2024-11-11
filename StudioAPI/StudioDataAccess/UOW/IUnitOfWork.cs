@@ -15,6 +15,7 @@ namespace StudioDataAccess.Uow
 
 		IUserProfileRepository UserProfileRepository { get; }
 		ICourseRepository CourseRepository { get; }
+		IEnrollmentRepository EnrollmentRepository { get; }
 		void Save();
 	}
 }

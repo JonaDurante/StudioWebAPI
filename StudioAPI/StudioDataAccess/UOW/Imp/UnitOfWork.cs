@@ -7,11 +7,13 @@ namespace StudioDataAccess.Uow.Imp
 		private readonly StudioDBContext _context;
 		public IUserProfileRepository UserProfileRepository { get; }
 		public ICourseRepository CourseRepository { get; }
-		public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository, ICourseRepository courseRepository)
+		public IEnrollmentRepository EnrollmentRepository { get; }
+		public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository, ICourseRepository courseRepository, IEnrollmentRepository enrollmentRepository)
 		{
 			_context = context;
 			UserProfileRepository = userProfileRepository;
 			CourseRepository = courseRepository;
+			EnrollmentRepository = enrollmentRepository;
 		}
 
 		public void Dispose()

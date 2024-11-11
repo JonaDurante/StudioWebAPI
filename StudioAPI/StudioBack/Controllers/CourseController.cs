@@ -39,5 +39,12 @@ namespace StudioBack.Controllers
 			_courseService.Delete(id);
 			return Ok();
 		}
+
+		[HttpPut("Update")]
+		public async Task<IActionResult> Edit(Guid id, [FromBody] CourseDto courseDto)
+		{
+			_courseService.Update(id, courseDto);
+			return Ok();
+		}
 	}
 }
