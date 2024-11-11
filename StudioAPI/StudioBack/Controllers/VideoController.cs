@@ -45,7 +45,6 @@ namespace StudioBack.Controllers
         [HttpPut("Update")]
         public async Task<IActionResult> Update([FromHeader] Guid id, [FromBody] RequestVideoDto updateVideoDto)
         {
-            /*VER GENERIC REPOSITORY Y SERVICE*/
             var video = await _videoService.GetById(id);
             var updateVideo = _mapper.Map(updateVideoDto, video);
             _videoService.Update(updateVideo);
