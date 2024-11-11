@@ -8,7 +8,8 @@ namespace StudioDataAccess
 	public class StudioDBContext : IdentityDbContext<UserApp>
 	{
 		private readonly ILoggerFactory _loggerFactory;
-		public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Video> Video { get; set; }
         public DbSet<EmailSetting> EmailSettings { get; set; }
 
 		public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
@@ -55,7 +56,14 @@ namespace StudioDataAccess
 					entity.HasOne(e => e.UserApp)
 						.WithOne().HasForeignKey<UserProfile>(e => e.IdUser).HasPrincipalKey<UserApp>(e => e.Id);
 				});
-			}
+                builder.Entity<Video>(entity =>
+                {
+                    Guid guid;
+                    entity.Property(e => e.Id).HasConversion(
+                        t => t.ToString(),
+                        t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");
+                });
+            }
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -15,6 +15,7 @@ namespace StudioDataAccess.Uow
 
         IUserProfileRepository UserProfileRepository { get; }
         IEmailSettingsRepository EmailSettingsRepository { get; }
+        IVideoRepository VideoRepository { get; }
         void Save();
     }
 }
