@@ -1,23 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using StudioDataAccess.Uow;
 using StudioModel.Domain;
-using StudioModel.Dtos.UserProfile;
+using StudioModel.Dtos.Enrollment;
 
 namespace StudioService.Services.Imp
 {
 	public class EnrollmentService : IEnrollmentService
 	{
-		public Task<Enrollment> Create(Guid id, UserProfileDto userProfileDto)
+		private readonly IUnitOfWork _unitOfWork;
+		private readonly IMapper _mapper;
+		public EnrollmentService(IUnitOfWork unitOfWork, IMapper mapper)
 		{
-			throw new NotImplementedException();
+			_unitOfWork = unitOfWork;
+			_mapper = mapper;
 		}
-
-		public void Delete(Guid id)
+		public async Task<Enrollment> Create(Guid id, EnrollmentDto enrollmentDto)
 		{
-			throw new NotImplementedException();
+			var enrollment = _mapper.Map<Enrollment>(enrollmentDto);
+
+			if (enrollment != null)
+			{
+				await _unitOfWork.EnrollmentRepository.Add(enrollment);
+				_unitOfWork.Save();
+				return enrollment;
+			}
+			return null;
 		}
 
 		public Task<List<Enrollment>> GetAllEnrollments()
@@ -29,10 +36,12 @@ namespace StudioService.Services.Imp
 		{
 			throw new NotImplementedException();
 		}
-
-		public Task<Enrollment> Update(Guid id, UserProfileDto userProfileDto)
+		public void Delete(Guid id)
 		{
-			throw new NotImplementedException();
+			_unitOfWork.EnrollmentRepository.LogicDelete(id);
+			_unitOfWork.Save();
+			return;
 		}
+
 	}
 }

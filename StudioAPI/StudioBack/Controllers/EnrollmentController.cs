@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudioModel.Dtos.Enrollment;
+using StudioService.Services;
 
 namespace StudioBack.Controllers
 {
@@ -6,6 +8,12 @@ namespace StudioBack.Controllers
 	[Route("[controller]")]
 	public class EnrollmentController : ControllerBase
 	{
+		private readonly IEnrollmentService _enrollmentService;
+		public EnrollmentController(IEnrollmentService enrollmentService)
+		{
+			_enrollmentService = enrollmentService;
+		}
+
 		[HttpGet]
 		public async Task<IActionResult> Get()
 		{
@@ -13,8 +21,13 @@ namespace StudioBack.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create()
+		public async Task<IActionResult> Create(Guid id, [FromBody] EnrollmentDto enrollmentDto)
 		{
+			if (ModelState.IsValid)
+			{
+				var enrollment = _enrollmentService.Create(id, enrollmentDto);
+				return Ok(enrollmentDto);
+			}
 			return BadRequest();
 		}
 
