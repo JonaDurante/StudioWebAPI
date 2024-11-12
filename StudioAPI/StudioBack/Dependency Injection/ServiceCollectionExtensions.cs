@@ -26,6 +26,8 @@ namespace StudioBack.Dependency_Injection
             services.AddTransient<IEmailService, EmailService>();
 
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IVideoRepository, VideoRepository>();
+            services.AddScoped<IVideoService, VideoService>();
             services.AddScoped<IEmailSettingsRepository, EmailSettingsRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
