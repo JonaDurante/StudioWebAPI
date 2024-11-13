@@ -8,7 +8,7 @@ namespace StudioService.Services
 		Task<List<Enrollment>> GetAllEnrollments();
 		Task<IEnumerable<Enrollment>> GetAllEnrollmentsByUser(Guid id);
 		Task<Enrollment> GetById(Guid id);
-		Task<Enrollment> Create(Guid id, EnrollmentDto enrollmentDto);
+		Task<Enrollment> EnrollUser(EnrollmentDto enrollmentDto);
 		//Task<Enrollment> Update(Guid id, EnrollmentDto enrollmentDto);
 		void Delete(Guid id);
 	}

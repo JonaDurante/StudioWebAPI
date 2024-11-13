@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StudioModel.Domain;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace StudioModel.Dtos.Enrollment
 {
-	public class EnrollmentDto
+    public class EnrollmentDto
 	{
 		[Required]
 		[DataType(DataType.DateTime)]
 		public DateTime EnrollmentDate { get; set; }
-		public string UserId { get; set; }
-		public Guid CourseId { get; set; }
+        [Required]
+        public Guid UserId { get; set; }
+        [Required]
+        public Guid CourseId { get; set; }
 	}
 }
