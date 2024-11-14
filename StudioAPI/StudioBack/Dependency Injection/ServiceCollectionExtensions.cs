@@ -1,33 +1,29 @@
 ﻿using StudioDataAccess.Repositories;
-using StudioDataAccess.Repositories.Imp;
 using StudioDataAccess.Uow;
 using StudioDataAccess.Uow.Imp;
-using StudioService.LoginService;
-using StudioService.LoginService.Imp;
-using StudioService.Services;
-using StudioService.Services.Imp;
 
 namespace StudioBack.Dependency_Injection
 {
-	public static class ServiceCollectionExtensions
-	{
-		public static IServiceCollection RegisterDependencies(this IServiceCollection services)
-		{
-			services.Scan(x =>
-				x.FromCallingAssembly()
-					.AddClasses()
-					.AsMatchingInterface()
-					.WithScopedLifetime());
+    public static class ServiceCollectionExtensions
+    {
+        public static IServiceCollection RegisterDependencies(this IServiceCollection services)
+        {
+            services.Scan(scan => scan
+                   .FromCallingAssembly()
+                   .AddClasses(classes => classes.Where(type => type.Name.EndsWith("Service")))
+                   .AsImplementedInterfaces()
+                   .WithScopedLifetime());
 
-			services.AddScoped<IAccountService, AccountService>();
-			services.AddScoped<IJwtService, JwtService>();
-			services.AddScoped<IRoleService, RoleService>();
-			services.AddScoped<IUserProfileService, UserProfileService>();
-			services.AddScoped<ICourseService, CourseService>();
-			services.AddScoped<IEnrollmentService, EnrollmentService>();
-			services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.Scan(scan => scan
+                    .FromAssemblyOf<IUserProfileRepository>()
+                    .AddClasses(classes => classes.Where(type => type.Name.EndsWith("Repository")))
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime());
 
-			return services;
-		}
-	}
+            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            return services;
+        }
+    }
 }

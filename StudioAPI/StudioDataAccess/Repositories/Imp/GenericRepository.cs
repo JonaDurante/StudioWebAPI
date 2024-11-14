@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudioModel.Domain;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace StudioDataAccess.Repositories.Imp
@@ -19,12 +20,17 @@ namespace StudioDataAccess.Repositories.Imp
             return await entity.ToListAsync();
         }
 
-        public IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive)
+        public IQueryable<T> Filter(Expression<Func<T, bool>> filterExpression, Expression<Func<T, object>>[] includeProperties = null, bool isActive = true)
         {
             IQueryable<T> query = entity;
             if (isActive)
             {
-                query.Where(q => q.IsActive == isActive);
+                query = query.Where(q => q.IsActive == isActive);
+            }
+
+            if (filterExpression != null)
+            {
+                query = query.Where(filterExpression);
             }
 
             foreach (var includeProperty in includeProperties)
@@ -33,6 +39,7 @@ namespace StudioDataAccess.Repositories.Imp
             }
             return query;
         }
+
 
         public async Task<T> GetById(Guid id)
         {

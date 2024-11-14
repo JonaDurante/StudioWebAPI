@@ -1,13 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudioModel.Domain
 {
-	public class Enrollment
+    public class Enrollment : Entity
 	{
-		[Key]
-		public Guid Id { get; set; }
-
 		[Required]
 		[DataType(DataType.DateTime)]
 		public DateTime EnrollmentDate { get; set; }

@@ -33,9 +33,12 @@ namespace StudioService.Services.Imp
                 throw new Exception("El usuario no existe.");
             }
 
-            var existingEnrollment = await _unitOfWork.EnrollmentRepository
-        .Filter(e => e.UserId == user.Id && e.CourseId == course.Id, true)
-        .FirstOrDefaultAsync();
+            var existingEnrollment = _unitOfWork.EnrollmentRepository
+        .Filter(
+                e => e.UserId == enrollmentDto.UserId && e.CourseId == course.Id, 
+                [e => e.Course, e => e.User],
+                true)
+        .FirstOrDefault();
 
             if (existingEnrollment != null)
             {
@@ -68,10 +71,10 @@ namespace StudioService.Services.Imp
             return;
         }
 
-        public async Task<IEnumerable<Enrollment>> GetAllEnrollmentsByUser(Guid id)
+        public async Task<IEnumerable<Enrollment>> GetAllEnrollmentsByUser(string id)
         {
             var listEnrollments = await _unitOfWork.EnrollmentRepository.GetAll();
-            return listEnrollments.Where(x => x.UserId == id.ToString());
+            return listEnrollments.Where(x => x.UserId == id);
         }
     }
 }

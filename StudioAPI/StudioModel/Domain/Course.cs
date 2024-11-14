@@ -2,11 +2,8 @@
 
 namespace StudioModel.Domain
 {
-	public class Course
+	public class Course : Entity
 	{
-		[Key]
-		public Guid Id { get; set; }
-
 		[Required]
 		[StringLength(20)]
 		public string Name { get; set; }

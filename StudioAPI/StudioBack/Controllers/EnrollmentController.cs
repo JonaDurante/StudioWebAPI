@@ -14,14 +14,14 @@ namespace StudioBack.Controllers
             _enrollmentService = enrollmentService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllEnrollmentsByUser")]
         public async Task<IActionResult> GetAllEnrollmentsByUser(Guid id)
         {
-            var enrollments = await _enrollmentService.GetAllEnrollmentsByUser(id);
+            var enrollments = await _enrollmentService.GetAllEnrollmentsByUser(id.ToString());
             return Ok(enrollments);
         }
 
-        [HttpPost]
+        [HttpPost("EnrollUser")]
         public async Task<IActionResult> EnrollUser([FromBody] EnrollmentDto enrollmentDto)
         {
             if (enrollmentDto == null)
@@ -33,8 +33,8 @@ namespace StudioBack.Controllers
             return Ok(enrollmentDto);
         }
 
-        [HttpDelete("Delete")]
-        public IActionResult Delete(Guid id)
+        [HttpDelete("DeleteEnrollment")]
+        public IActionResult DeleteEnrollment(Guid id)
         {
             _enrollmentService.Delete(id);
             return Ok();
