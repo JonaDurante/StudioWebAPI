@@ -4,8 +4,8 @@ namespace StudioDataAccess.Repositories
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<List<T>> GetAll();
-        IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive);
+        Task<List<T>> GetAll(bool onlyActive = true);
+        IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive = false);
         IEnumerable<T> GetActive(Func<T, bool> expression);
         Task<T> GetById(Guid id);
         Task Add(T entity);

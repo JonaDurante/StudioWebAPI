@@ -14,12 +14,17 @@ namespace StudioDataAccess.Repositories.Imp
             _dbContext = dbContext;
             entity = _dbContext.Set<T>();
         }
-        public async Task<List<T>> GetAll()
+        public async Task<List<T>> GetAll(bool onlyActive = true)
         {
-            return await entity.ToListAsync();
+            var entityList = await entity.ToListAsync();
+            if (onlyActive) 
+            {
+                entityList = entityList.Where(e => e.IsActive).ToList();
+            }
+            return entityList;
         }
 
-        public IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive)
+        public IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive = false)
         {
             IQueryable<T> query = entity;
             if (isActive)

@@ -29,6 +29,8 @@ namespace StudioBack.Dependency_Injection
             services.AddScoped<IVideoRepository, VideoRepository>();
             services.AddScoped<IVideoService, VideoService>();
             services.AddScoped<IEmailSettingsRepository, EmailSettingsRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ICommentService, CommentService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

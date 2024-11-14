@@ -4,9 +4,9 @@ using StudioModel.Dtos.Video;
 
 namespace StudioBack.Mapper
 {
-    public class VideoProfile :Profile
+    public class VideoMapper :Profile
     {
-        public VideoProfile()
+        public VideoMapper()
         {
             CreateMap<RequestVideoDto, Video>();
         }

@@ -4,9 +4,9 @@ using StudioModel.Dtos.Role;
 
 namespace StudioBack.Mapper
 {
-    public class RolesProfile : Profile
+    public class RolesMapper : Profile
     {
-        public RolesProfile()
+        public RolesMapper()
         {
             CreateMap<IdentityRole, RoleDto>();
         }

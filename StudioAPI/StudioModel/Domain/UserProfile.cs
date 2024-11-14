@@ -37,6 +37,7 @@ namespace StudioModel.Domain
 
 		[ForeignKey("UserApp")]
 		public string IdUser { get; set; }
+
 		public UserApp UserApp { get; set; }
 	}
 }

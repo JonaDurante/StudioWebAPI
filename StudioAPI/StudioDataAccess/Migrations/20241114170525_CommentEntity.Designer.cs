@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudioDataAccess;
 
@@ -10,9 +11,11 @@ using StudioDataAccess;
 namespace StudioDataAccess.Migrations
 {
     [DbContext(typeof(StudioDBContext))]
-    partial class StudioDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241114170525_CommentEntity")]
+    partial class CommentEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
@@ -151,15 +154,33 @@ namespace StudioDataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("AuthorId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("CommentText")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CommentTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("StudioModel.Domain.CommentsUserByVideo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CommentId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsActive")
@@ -173,9 +194,11 @@ namespace StudioDataAccess.Migrations
 
                     b.HasIndex("AuthorId");
 
+                    b.HasIndex("CommentId");
+
                     b.HasIndex("VideoId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("CommentsUserByVideo");
                 });
 
             modelBuilder.Entity("StudioModel.Domain.EmailSetting", b =>
@@ -412,21 +435,29 @@ namespace StudioDataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudioModel.Domain.Comment", b =>
+            modelBuilder.Entity("StudioModel.Domain.CommentsUserByVideo", b =>
                 {
                     b.HasOne("StudioModel.Domain.UserApp", "Author")
-                        .WithMany("Comments")
+                        .WithMany("CommentsUserByVideo")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StudioModel.Domain.Comment", "Comment")
+                        .WithMany("CommentsUserByVideo")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StudioModel.Domain.Video", "Video")
-                        .WithMany("Comments")
+                        .WithMany("CommentsUserByVideo")
                         .HasForeignKey("VideoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Author");
+
+                    b.Navigation("Comment");
 
                     b.Navigation("Video");
                 });
@@ -449,14 +480,19 @@ namespace StudioDataAccess.Migrations
                     b.Navigation("UserApp");
                 });
 
+            modelBuilder.Entity("StudioModel.Domain.Comment", b =>
+                {
+                    b.Navigation("CommentsUserByVideo");
+                });
+
             modelBuilder.Entity("StudioModel.Domain.UserApp", b =>
                 {
-                    b.Navigation("Comments");
+                    b.Navigation("CommentsUserByVideo");
                 });
 
             modelBuilder.Entity("StudioModel.Domain.Video", b =>
                 {
-                    b.Navigation("Comments");
+                    b.Navigation("CommentsUserByVideo");
                 });
 #pragma warning restore 612, 618
         }
