@@ -10,7 +10,13 @@ namespace StudioDataAccess.Uow.Imp
 		public IEnrollmentRepository EnrollmentRepository { get; }
         public IEmailSettingsRepository EmailSettingsRepository { get; }
         public IVideoRepository VideoRepository { get; }
-        public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository, ICourseRepository courseRepository, IEnrollmentRepository enrollmentRepository)
+        public UnitOfWork(
+			StudioDBContext context, 
+			IUserProfileRepository userProfileRepository, 
+			ICourseRepository courseRepository, 
+			IEnrollmentRepository enrollmentRepository, 
+			IEmailSettingsRepository emailSettingsRepository, 
+			IVideoRepository videoRepository)
 		{
 			_context = context;
 			UserProfileRepository = userProfileRepository;
