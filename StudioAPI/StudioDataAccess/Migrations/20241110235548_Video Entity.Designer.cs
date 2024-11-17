@@ -217,9 +217,6 @@ namespace StudioDataAccess.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserProfileId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -228,8 +225,6 @@ namespace StudioDataAccess.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
-
-                    b.HasIndex("UserProfileId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -380,15 +375,6 @@ namespace StudioDataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("StudioModel.Domain.UserApp", b =>
-                {
-                    b.HasOne("StudioModel.Domain.UserProfile", "UserProfile")
-                        .WithMany()
-                        .HasForeignKey("UserProfileId");
-
-                    b.Navigation("UserProfile");
                 });
 
             modelBuilder.Entity("StudioModel.Domain.UserProfile", b =>
