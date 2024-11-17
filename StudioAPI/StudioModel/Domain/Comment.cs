@@ -5,13 +5,13 @@ namespace StudioModel.Domain
     public class Comment : Entity
     {
         [ForeignKey("Author")]
-        public string AuthorId { get; set; }
+        public Guid AuthorId { get; set; }
         [ForeignKey("Video")]
         public Guid VideoId { get; set; }
         public DateTime CommentTime { get; set; } = DateTime.Now;
         public string CommentText { get; set; }
 
-        public UserApp Author { get; set; }
+        public UserProfile Author { get; set; }
         public Video Video { get; set; }
     }
 }

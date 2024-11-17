@@ -414,7 +414,7 @@ namespace StudioDataAccess.Migrations
 
             modelBuilder.Entity("StudioModel.Domain.Comment", b =>
                 {
-                    b.HasOne("StudioModel.Domain.UserApp", "Author")
+                    b.HasOne("StudioModel.Domain.UserProfile", "Author")
                         .WithMany("Comments")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -449,7 +449,7 @@ namespace StudioDataAccess.Migrations
                     b.Navigation("UserApp");
                 });
 
-            modelBuilder.Entity("StudioModel.Domain.UserApp", b =>
+            modelBuilder.Entity("StudioModel.Domain.UserProfile", b =>
                 {
                     b.Navigation("Comments");
                 });

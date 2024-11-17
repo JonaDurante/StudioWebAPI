@@ -35,9 +35,9 @@ namespace StudioModel.Domain
 		[DataType(DataType.ImageUrl)]
 		public string? UserPhoto { get; set; }
 
-		[ForeignKey("UserApp")]
+        [ForeignKey("UserApp")]
 		public string IdUser { get; set; }
-
 		public UserApp UserApp { get; set; }
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 	}
 }

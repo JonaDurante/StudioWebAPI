@@ -64,7 +64,7 @@ namespace StudioService.Services.Imp
         public async void Delete(Guid commentId, Guid authorId)
         {
             var comment = await _unitOfWork.CommentRepository.GetById(commentId);
-            if (comment != null && comment.AuthorId == authorId.ToString())
+            if (comment != null && comment.AuthorId == authorId)
             {
                 _unitOfWork.CommentRepository.LogicDelete(commentId);
                 _unitOfWork.Save();

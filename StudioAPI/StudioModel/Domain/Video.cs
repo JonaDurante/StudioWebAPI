@@ -11,6 +11,6 @@
         public string Url { get; set; }
         public string ThumbnailUrl { get; set; }
 
-        public ICollection<Comment?> Comments { get; set; } = new HashSet<Comment?>();
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

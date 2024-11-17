@@ -48,10 +48,6 @@ namespace StudioDataAccess
                 {
                     entity.Property(e => e.UserName).HasColumnType("TEXT");
 
-                    entity
-                    .HasMany(e => e.Comments)
-                    .WithOne(e => e.Author)
-                    .HasForeignKey(e => e.AuthorId);
                 });
 
                 builder.Entity<UserProfile>(entity =>
@@ -61,6 +57,10 @@ namespace StudioDataAccess
                         t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");
                     entity.HasOne(e => e.UserApp)
                         .WithOne().HasForeignKey<UserProfile>(e => e.IdUser).HasPrincipalKey<UserApp>(e => e.Id);
+
+                    entity.HasMany(e => e.Comments)
+                        .WithOne(e => e.Author)
+                        .HasForeignKey(e => e.AuthorId);
                 });
 
                 builder.Entity<Video>(entity =>
@@ -82,6 +82,16 @@ namespace StudioDataAccess
                     entity.Property(e => e.Id).HasConversion(
                         t => t.ToString(),
                         t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");
+
+                    entity
+                    .HasOne(e => e.Video)
+                    .WithMany(e => e.Comments)
+                    .HasForeignKey(e => e.VideoId);
+
+                    entity
+                    .HasOne(e => e.Author)
+                    .WithMany(e => e.Comments)
+                    .HasForeignKey(e => e.AuthorId);
                 });
             }
         }
