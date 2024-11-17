@@ -11,6 +11,9 @@ namespace StudioDataAccess
 		public DbSet<UserProfile> UserProfiles { get; set; }
 		public DbSet<Course> Courses { get; set; }
 		public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Video> Video { get; set; }
+        public DbSet<EmailSetting> EmailSettings { get; set; }
 
 		public StudioDBContext(DbContextOptions<StudioDBContext> options, ILoggerFactory loggerFactory) : base(options)
 		{
@@ -67,6 +70,14 @@ namespace StudioDataAccess
 				.HasOne(e => e.Course)
 				.WithMany(c => c.Enrollments)
 				.HasForeignKey(e => e.CourseId);
+                builder.Entity<Video>(entity =>
+                {
+                    Guid guid;
+                    entity.Property(e => e.Id).HasConversion(
+                        t => t.ToString(),
+                        t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");
+                });
+            }
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

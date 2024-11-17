@@ -8,13 +8,17 @@ namespace StudioDataAccess.Uow.Imp
 		public IUserProfileRepository UserProfileRepository { get; }
 		public ICourseRepository CourseRepository { get; }
 		public IEnrollmentRepository EnrollmentRepository { get; }
-		public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository, ICourseRepository courseRepository, IEnrollmentRepository enrollmentRepository)
+        public IEmailSettingsRepository EmailSettingsRepository { get; }
+        public IVideoRepository VideoRepository { get; }
+        public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository, ICourseRepository courseRepository, IEnrollmentRepository enrollmentRepository)
 		{
 			_context = context;
 			UserProfileRepository = userProfileRepository;
 			CourseRepository = courseRepository;
 			EnrollmentRepository = enrollmentRepository;
-		}
+            EmailSettingsRepository = emailSettingsRepository;
+            VideoRepository = videoRepository;
+        }
 
 		public void Dispose()
 		{
