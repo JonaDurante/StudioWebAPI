@@ -17,19 +17,14 @@ namespace StudioDataAccess.Uow.Imp
 			ICourseRepository courseRepository, 
 			IEnrollmentRepository enrollmentRepository, 
 			IEmailSettingsRepository emailSettingsRepository, 
-			IVideoRepository videoRepository)
-		{
+			IVideoRepository videoRepository,
+            ICommentRepository commentRepository)
+
+        {
 			_context = context;
 			UserProfileRepository = userProfileRepository;
 			CourseRepository = courseRepository;
 			EnrollmentRepository = enrollmentRepository;
-
-        public UnitOfWork(StudioDBContext context, IUserProfileRepository userProfileRepository, IEmailSettingsRepository emailSettingsRepository, IVideoRepository videoRepository, ICommentRepository commentRepository)
-        {
-            _context = context;
-            UserProfileRepository = userProfileRepository;
-            EmailSettingsRepository = emailSettingsRepository;
-            VideoRepository = videoRepository;
             CommentRepository = commentRepository;
         }
 
