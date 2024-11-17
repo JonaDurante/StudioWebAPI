@@ -9,5 +9,5 @@ namespace StudioModel.Domain
 		public string Role { get; set; }
 
 		public UserProfile? UserProfile { get; set; }
-	}
+    }
 }

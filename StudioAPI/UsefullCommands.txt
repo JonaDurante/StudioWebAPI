@@ -1,6 +1,6 @@
 **Migrations**
 dotnet ef migrations add NombreDeLaMigracion --project StudioDataAccess --startup-project StudioBack --output-dir "Ruta/Donde/Guardar/La/Migracion"
 
-dotnet ef migrations add Initial --context StudioDBContext --project StudioDataAccess --startup-project StudioBack
+dotnet ef migrations add [NOMBREMIGRACIÓN] --context StudioDBContext --project StudioDataAccess --startup-project StudioBack
 dotnet ef database update --context StudioDBContext --project StudioDataAccess --startup-project StudioBack
 dotnet ef migrations remove --context StudioDBContext --project StudioDataAccess --startup-project StudioBack
