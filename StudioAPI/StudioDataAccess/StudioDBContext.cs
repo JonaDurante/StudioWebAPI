@@ -58,7 +58,8 @@ namespace StudioDataAccess
                         t => t.ToString(),
                         t => Guid.TryParse(t, out guid) ? guid : Guid.Empty).HasColumnType("TEXT");
                     entity.HasOne(e => e.UserApp)
-                        .WithOne().HasForeignKey<UserProfile>(e => e.IdUser).HasPrincipalKey<UserApp>(e => e.Id);
+                        .WithOne(e => e.UserProfile)
+                        .HasForeignKey<UserProfile>(e => e.IdUser).HasPrincipalKey<UserApp>(e => e.Id);
 
                     entity.HasMany(e => e.Comments)
                         .WithOne(e => e.Author)
