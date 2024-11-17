@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudioModel.Domain;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace StudioDataAccess.Repositories.Imp

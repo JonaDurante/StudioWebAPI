@@ -2,9 +2,8 @@
 using Microsoft.Extensions.Logging;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
-using StudioService.Services;
 
-namespace StudioService.LoginService.Imp
+namespace StudioService.Services.Imp
 {
     public class AccountService : IAccountService
     {

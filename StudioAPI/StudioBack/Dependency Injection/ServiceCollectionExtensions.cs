@@ -1,6 +1,7 @@
 ﻿using StudioDataAccess.Repositories;
 using StudioDataAccess.Uow;
 using StudioDataAccess.Uow.Imp;
+using StudioService.Services;   
 
 namespace StudioBack.Dependency_Injection
 {
@@ -9,7 +10,7 @@ namespace StudioBack.Dependency_Injection
         public static IServiceCollection RegisterDependencies(this IServiceCollection services)
         {
             services.Scan(scan => scan
-                   .FromCallingAssembly()
+                   .FromAssemblyOf<IAccountService>()
                    .AddClasses(classes => classes.Where(type => type.Name.EndsWith("Service")))
                    .AsImplementedInterfaces()
                    .WithScopedLifetime());

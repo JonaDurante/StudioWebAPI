@@ -1,7 +1,7 @@
 ﻿using StudioModel.Domain;
 using StudioModel.Dtos.Account;
 
-namespace StudioService.LoginService
+namespace StudioService.Services
 {
 	public interface IAccountService
 	{
