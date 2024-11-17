@@ -18,6 +18,7 @@ namespace StudioDataAccess.Uow
 		IEnrollmentRepository EnrollmentRepository { get; }
         IEmailSettingsRepository EmailSettingsRepository { get; }
         IVideoRepository VideoRepository { get; }
+        ICommentRepository CommentRepository { get; }
         void Save();
 	}
 }

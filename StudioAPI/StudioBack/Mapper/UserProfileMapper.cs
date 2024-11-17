@@ -5,9 +5,9 @@ using StudioModel.Dtos.UserProfile;
 
 namespace StudioBack.Mapper
 {
-    public class UserProfileProfile : Profile
+    public class UserProfileMapper : Profile
     {
-        public UserProfileProfile()
+        public UserProfileMapper()
         {
             CreateMap<UserApp, UserDto>();
             CreateMap<UserProfile, UserProfileDto>().ReverseMap();

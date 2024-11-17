@@ -14,12 +14,14 @@ namespace StudioBack.Controllers
     public class AdministrationController : ControllerBase
     {
         private readonly IRoleService _roleService;
+        private readonly ICommentService _commmentService;
         private readonly IMapper _mapper;
 
-        public AdministrationController(IRoleService roleService, IMapper mapper)
+        public AdministrationController(IRoleService roleService, IMapper mapper, ICommentService commmentService)
         {
             _roleService = roleService;
             _mapper = mapper;
+            _commmentService = commmentService;
         }
 
         [HttpGet("GetAllRoles")]
@@ -45,6 +47,13 @@ namespace StudioBack.Controllers
             }
 
             return StatusCode(500, "Internal server error");
+        }
+
+        [HttpDelete("DeleteComment")]
+        public IActionResult Delete(Guid commentId)
+        {
+            _commmentService.Delete(commentId);
+            return Ok();
         }
     }
 }

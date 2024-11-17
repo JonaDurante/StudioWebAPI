@@ -2,7 +2,7 @@
 
 namespace StudioDataAccess.Repositories
 {
-    public interface IEmailSettingsRepository : IGenericRepository<EmailSetting>
+    public interface ICommentRepository : IGenericRepository<Comment>
     {
     }
 }
