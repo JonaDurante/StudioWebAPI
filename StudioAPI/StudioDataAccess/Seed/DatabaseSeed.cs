@@ -35,7 +35,7 @@ namespace StudioDataAccess.Seed
             }
             if (await findUserExist(Admin))
             {
-                var adminUser = new UserApp { UserName = Admin, Email = "admin@pegasus.net" };
+                var adminUser = new UserApp { UserName = Admin, Email = "admin@pegasus.net", EmailConfirmed = true };
                 var createdUser = await Manager.CreateAsync(adminUser, AdminPassword);
 
                 if (createdUser.Succeeded)
@@ -46,7 +46,7 @@ namespace StudioDataAccess.Seed
 
             if (await findUserExist(TestUser))
             {
-                var testUser = new UserApp { UserName = TestUser, Email = "testuser@pegasus.net", Role = TestUser };
+                var testUser = new UserApp { UserName = TestUser, Email = "testuser@pegasus.net", Role = TestUser, EmailConfirmed = true };
                 var createdUser = await Manager.CreateAsync(testUser, CommonPassword);
 
                 if (createdUser.Succeeded)
@@ -57,7 +57,7 @@ namespace StudioDataAccess.Seed
 
             if (await findUserExist(TestTeacher))
             {
-                var testTeacher = new UserApp { UserName = TestTeacher, Email = "testteacher@pegasus.net", Role = TestTeacher };
+                var testTeacher = new UserApp { UserName = TestTeacher, Email = "testteacher@pegasus.net", Role = TestTeacher, EmailConfirmed = true };
                 var createdUser = await Manager.CreateAsync(testTeacher, CommonPassword);
 
                 if (createdUser.Succeeded)
