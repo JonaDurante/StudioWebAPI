@@ -24,12 +24,17 @@ namespace StudioDataAccess.Repositories.Imp
             return entityList;
         }
 
-        public IQueryable<T> Filter(Expression<Func<T, object>>[] includeProperties, bool isActive = false)
+        public IQueryable<T> Filter(Expression<Func<T, bool>> filterExpression, Expression<Func<T, object>>[] includeProperties = null, bool isActive = true)
         {
             IQueryable<T> query = entity;
             if (isActive)
             {
-                query.Where(q => q.IsActive == isActive);
+                query = query.Where(q => q.IsActive == isActive);
+            }
+
+            if (filterExpression != null)
+            {
+                query = query.Where(filterExpression);
             }
 
             foreach (var includeProperty in includeProperties)
@@ -38,6 +43,7 @@ namespace StudioDataAccess.Repositories.Imp
             }
             return query;
         }
+
 
         public async Task<T> GetById(Guid id)
         {
@@ -73,5 +79,6 @@ namespace StudioDataAccess.Repositories.Imp
         {
             this.entity.Remove(entity);
         }
-    }
+
+	}
 }

@@ -34,7 +34,7 @@ namespace StudioBack.Middlewares
             var response = new
             {
                 StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error",
+                Message = $"Internal Server Error, {exception.Message}",
                 Detail = exception.Message
             };
 

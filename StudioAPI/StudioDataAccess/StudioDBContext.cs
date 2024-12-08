@@ -10,6 +10,8 @@ namespace StudioDataAccess
         private readonly ILoggerFactory _loggerFactory;
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Video> Videos { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<EmailSetting> EmailSettings { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
@@ -76,6 +78,16 @@ namespace StudioDataAccess
                     .WithOne(e => e.Video)
                     .HasForeignKey(e => e.VideoId);
                 });
+
+                builder.Entity<Enrollment>()
+                .HasOne(e => e.User)
+                .WithMany(u => u.Enrollments)
+                .HasForeignKey(e => e.UserId);
+
+                builder.Entity<Enrollment>()
+                    .HasOne(e => e.Course)
+                    .WithMany(c => c.Enrollments)
+                    .HasForeignKey(e => e.CourseId);
 
                 builder.Entity<Comment>(entity =>
                 {

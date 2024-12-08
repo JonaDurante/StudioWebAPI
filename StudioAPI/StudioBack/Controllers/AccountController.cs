@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StudioModel.Dtos.Account;
 using StudioModel.Dtos.UserProfile;
-using StudioService.LoginService;
+using StudioService.Services;
 
 namespace StudioBack.Controllers
 {

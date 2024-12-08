@@ -5,12 +5,11 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
-using StudioService.Services;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace StudioService.LoginService.Imp
+namespace StudioService.Services.Imp
 {
     public class AccountService : IAccountService
     {

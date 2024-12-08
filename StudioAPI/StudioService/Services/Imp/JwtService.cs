@@ -1,12 +1,11 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using StudioModel.Domain;
-using StudioService.Services;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
-namespace StudioService.LoginService.Imp
+namespace StudioService.Services.Imp
 {
     public class JwtService : IJwtService
     {

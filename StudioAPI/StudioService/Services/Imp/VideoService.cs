@@ -1,6 +1,5 @@
 ﻿using StudioDataAccess.Uow;
 using StudioModel.Domain;
-using StudioModel.Dtos.Video;
 
 namespace StudioService.LoginService.Imp
 {

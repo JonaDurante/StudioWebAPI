@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using StudioModel.Domain;
 using StudioModel.Dtos.UserAndRole;
 
-namespace StudioService.LoginService.Imp
+namespace StudioService.Services.Imp
 {
     public class RoleService : IRoleService
     {

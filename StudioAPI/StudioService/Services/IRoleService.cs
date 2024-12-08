@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StudioModel.Dtos.UserAndRole;
 
-namespace StudioService.LoginService
+namespace StudioService.Services
 {
     public interface IRoleService
     {
