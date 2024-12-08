@@ -14,7 +14,7 @@ namespace StudioService.Services.Imp
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 		}
-		public async Task<Course> Create(Guid id, CourseDto courseDto)
+		public async Task<Course?> Create(Guid id, CourseDto courseDto)
 		{
 			var course = _mapper.Map<Course>(courseDto);
 
@@ -35,7 +35,7 @@ namespace StudioService.Services.Imp
 			return;
 		}
 
-		public async Task<Course> GetById(Guid id)
+		public async Task<Course?> GetById(Guid id)
 		{
 			var course = _unitOfWork.CourseRepository.GetActive(up => up.Id == id).FirstOrDefault();
 
@@ -51,7 +51,7 @@ namespace StudioService.Services.Imp
 			return await _unitOfWork.CourseRepository.GetAll();
 		}
 
-		public async Task<Course> Update(Guid id, CourseDto courseDto)
+		public async Task<Course?> Update(Guid id, CourseDto courseDto)
 		{
 			var course = await GetById(id);
 			if (course != null)

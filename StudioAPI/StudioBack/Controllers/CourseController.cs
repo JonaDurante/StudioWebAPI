@@ -27,7 +27,7 @@ namespace StudioBack.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var course = _courseService.Create(id, CourseDto);
+				var course = await _courseService.Create(id, CourseDto);
 				return Ok(CourseDto);
 			}
 			return BadRequest();
@@ -43,7 +43,7 @@ namespace StudioBack.Controllers
 		[HttpPut("Update")]
 		public async Task<IActionResult> Edit(Guid id, [FromBody] CourseDto courseDto)
 		{
-			_courseService.Update(id, courseDto);
+			await _courseService.Update(id, courseDto);
 			return Ok();
 		}
 	}

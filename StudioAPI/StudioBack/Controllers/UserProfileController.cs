@@ -38,7 +38,7 @@ namespace StudioBack.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var userProfile = _userProfileService.Create(id, userProfileDto);
+				var userProfile = await _userProfileService.Create(id, userProfileDto);
 				return Ok(userProfileDto);
 			}
 			return BadRequest();

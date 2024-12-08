@@ -24,7 +24,7 @@ namespace StudioDataAccess.Repositories.Imp
             return entityList;
         }
 
-        public IQueryable<T> Filter(Expression<Func<T, bool>> filterExpression, Expression<Func<T, object>>[] includeProperties = null, bool isActive = true)
+        public IQueryable<T> Filter(Expression<Func<T, bool>> filterExpression, Expression<Func<T, object>>[]? includeProperties = null, bool isActive = true)
         {
             IQueryable<T> query = entity;
             if (isActive)
