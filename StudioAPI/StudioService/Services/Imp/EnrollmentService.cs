@@ -9,6 +9,7 @@ namespace StudioService.Services.Imp
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+
         public EnrollmentService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -27,7 +28,7 @@ namespace StudioService.Services.Imp
                 throw new Exception("El curso especificado no existe.");
             }
 
-            var user = await _unitOfWork.UserProfileRepository.GetById(course.Id);
+            var user = _unitOfWork.UserProfileRepository.GetActive(x => x.IdUser == enrollmentDto.UserId);
             if (user == null)
             {
                 throw new Exception("El usuario no existe.");
