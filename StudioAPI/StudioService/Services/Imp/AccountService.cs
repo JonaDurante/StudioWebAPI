@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StudioModel.Domain;
 using StudioModel.Dtos.Account;
-using System.Linq;
+using StudioService.LoginService;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -19,7 +19,7 @@ namespace StudioService.Services.Imp
         private readonly IJwtService _jwtService;
         private readonly IEmailService _emailService;
 
-        private const string ConfirmEmailUrl = "https://localhost:7253/Account/ConfirmEmail?confirmationTokenString={0}";
+        private const string ConfirmEmailUrl = "http://localhost:4200/confirmed-email?confirmationTokenString={0}";
         private const string Subject = "Confirma tu email";
         private const string Body = "Por favor confirma tu cuenta haciendo click en el siguiente enlace: <a href='{0}'>Confirmar Email</a>";
 

@@ -25,7 +25,9 @@ namespace StudioDataAccess.Uow.Imp
 			UserProfileRepository = userProfileRepository;
 			CourseRepository = courseRepository;
 			EnrollmentRepository = enrollmentRepository;
+			EmailSettingsRepository = emailSettingsRepository;
             CommentRepository = commentRepository;
+            VideoRepository = videoRepository;
         }
 
         public void Dispose()
