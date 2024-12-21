@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StudioModel.Dtos.Account;
 using StudioModel.Dtos.UserProfile;
+using StudioService.LoginService;
 using StudioService.Services;
 
 namespace StudioBack.Controllers
@@ -38,14 +39,14 @@ namespace StudioBack.Controllers
             return await _accountService.Register(userLoginDto);
 		}
 
-        [HttpPost("ConfirmEmail")]
+        [HttpGet("ConfirmEmail")]
         public async Task<IActionResult> ConfirmEmail(string confirmationTokenString)
         {
-            var confirmEmail = await _accountService.ConfirmEmail(confirmationTokenString);
+            var userToken = await _accountService.ConfirmEmail(confirmationTokenString);
 
-            if (confirmEmail != null)
+            if (userToken != null)
             {
-                return Ok(confirmEmail);
+                return Ok(userToken);
             }
 
             return Unauthorized("Invalid log");

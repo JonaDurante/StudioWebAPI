@@ -71,7 +71,10 @@ namespace StudioBack
                 options.AddPolicy("AllowSpecificOrigin",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); ;
+                        builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials(); 
                     });
             });
 
@@ -87,11 +90,11 @@ namespace StudioBack
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowSpecificOrigin");
+            
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            app.UseCors(x => x.AllowAnyOrigin());
 
             app.MapControllers();
 

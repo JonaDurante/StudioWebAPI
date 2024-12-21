@@ -1,7 +1,9 @@
 ﻿using StudioDataAccess.Repositories;
+using StudioDataAccess.Repositories.Imp;
 using StudioDataAccess.Uow;
 using StudioDataAccess.Uow.Imp;
-using StudioService.Services;   
+using StudioService.LoginService;
+using StudioService.Services;
 
 namespace StudioBack.Dependency_Injection
 {
@@ -21,7 +23,6 @@ namespace StudioBack.Dependency_Injection
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
 
-            
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
