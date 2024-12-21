@@ -19,7 +19,7 @@ namespace StudioService.Services.Imp
             EmailSetting? emailSetting = _unitOfWork.EmailSettingsRepository.GetAll().Result.FirstOrDefault();
             if (emailSetting is null)
             {
-                return;
+                throw new Exception("No se está cargando EmailSettingsRepository");
             }
 
             var fromEmail = emailSetting.Email;
